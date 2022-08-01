@@ -11,10 +11,15 @@ export class Engine{
     load(){
         
         this.screen.container.style.cssText += this.screen.configContainer("#000")
-        this.background = new Background(this.screen.width, this.screen.height)
-        this.background.addLayer("nebuleuse", 0, Assets.png('nebuleuse'))
+        this.background = new Background(this.screen.width, this.screen.height, this.screen)
+        this.background.addLayer("nebuleuse", Assets.png("nebuleuse"), this.screen)
+        
     }
 
-    
+    test(){
+
+        this.background.layers[0].animate('left')
+
+    }
 
 }

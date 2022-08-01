@@ -23,6 +23,7 @@ export class Screen{
     }
 
     configContainer(color){
+
         this.css = 
             CssSnipet.minWidthPx(this.minWidth) + 
             CssSnipet.minHeightPx(this.minHeight) + 
@@ -39,6 +40,7 @@ export class Screen{
             CssSnipet.webkitTransform('translateY(-50%)')
 
         return this.css
+        
     }
 
 }

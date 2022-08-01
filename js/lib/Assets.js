@@ -1,7 +1,7 @@
 export class Assets{
 
     static png(name){
-        return '../assets/img/' + name + '.png'
+        return '../js/assets/img/' + name + '.png'
     }
     
 }
