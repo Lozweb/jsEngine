@@ -1,4 +1,4 @@
-export class CssSnipet{
+export class Css{
 
     /*MinWidht MinHeight*/
     static minWidthPx(minWidth){

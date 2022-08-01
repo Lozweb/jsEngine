@@ -1,4 +1,4 @@
-import { CssSnipet } from "./CssSnipet.js"
+import { Css } from "./Css.js"
 
 export class Screen{
 
@@ -25,19 +25,19 @@ export class Screen{
     configContainer(color){
 
         this.css = 
-            CssSnipet.minWidthPx(this.minWidth) + 
-            CssSnipet.minHeightPx(this.minHeight) + 
-            CssSnipet.widthPx(this.width) + 
-            CssSnipet.heightPx(this.height) +  
-            CssSnipet.position('absolute') + 
-            CssSnipet.zIndex('-10') +
-            CssSnipet.backgroundColor(color) + 
-            CssSnipet.overflow('hidden') + 
-            CssSnipet.margin('auto') + 
-            CssSnipet.top('50%') + 
-            CssSnipet.left('0') + 
-            CssSnipet.right('0') + 
-            CssSnipet.webkitTransform('translateY(-50%)')
+            Css.minWidthPx(this.minWidth) + 
+            Css.minHeightPx(this.minHeight) + 
+            Css.widthPx(this.width) + 
+            Css.heightPx(this.height) +  
+            Css.position('absolute') + 
+            Css.zIndex('-10') +
+            Css.backgroundColor(color) + 
+            Css.overflow('hidden') + 
+            Css.margin('auto') + 
+            Css.top('50%') + 
+            Css.left('0') + 
+            Css.right('0') + 
+            Css.webkitTransform('translateY(-50%)')
 
         return this.css
         
