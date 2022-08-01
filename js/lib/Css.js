@@ -55,6 +55,10 @@ export class Css{
         return 'background-size:' + value + ';'
     }
 
+    static opacity(value){
+        return 'opacity:' + value + ';' 
+    }
+
     /*Position*/
     static position(value){
         return 'position:' + value + ';'
@@ -95,6 +99,10 @@ export class Css{
 
     static borderRadius(value){
         return 'border-radius:' + value + ';'
+    }
+
+    static borer(value){
+        return "border:" + value + ';'
     }
 
 }

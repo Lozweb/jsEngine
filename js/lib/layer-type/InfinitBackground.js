@@ -34,11 +34,16 @@ export class InifinitBackground extends Layer{
         if(direction === "right") this.backgroundPositionX++;
         if(direction === "top") this.backgroundPositionY--;
         if(direction === "bottom") this.backgroundPositionY++;
-
+        
         if(direction === "left" || direction === "right") 
             this.element.style.backgroundPositionX = this.backgroundPositionX + "px"
         if(direction === "top" || direction === "bottom") 
             this.element.style.backgroundPositionY = this.backgroundPositionY + "px"
     
     }
+
+    animate(direction){
+        this.interval = setInterval(this.moveTo.bind(this), 33, direction)
+    }
+
 }

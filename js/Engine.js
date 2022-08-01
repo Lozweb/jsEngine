@@ -14,15 +14,14 @@ export class Engine{
         this.screen.container.style.cssText += this.screen.configContainer("#000")
         this.background = new Background(this.screen.width, this.screen.height, this.screen)
         
-        this.background.addLayer("nebuleuse", "infinitBackground", this.screen, Assets.png("nebuleuse"))
-        this.background.addLayer("stars", "infinitStars", this.screen)
+        this.background.addLayer("stars", "infinitStars", this.screen.container)
+        this.background.addLayer("nebuleuse", "infinitBackground", this.screen.container, Assets.png("nebuleuse"))
     }
 
     run(){
 
-        this.pos --;
-        let test = document.getElementById("nebuleuse")
-        test.style.backgroundPositionX = this.pos + "px"
+        this.background.layers[1].animate("left")
+        this.background.layers[0].animate()
         
     }
 }

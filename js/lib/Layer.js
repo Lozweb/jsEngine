@@ -14,11 +14,4 @@ export class Layer{
     
     }
 
-    createHtmlElement(){
-        
-        this.html = '<div id="' + this.name + '"></div>'
-        return this.html
-
-    }
-
 }
