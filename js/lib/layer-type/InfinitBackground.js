@@ -17,6 +17,7 @@ export class InifinitBackground extends Layer{
     configCss(){
 
         this.css = 
+        Css.backgroundImage(this.backgroundImage) +
         Css.backgroundSize("auto 100%") + 
         Css.backgroundPosition(this.backgroundPositionX, this.backgroundPositionY) + 
         Css.backgroundRepeat("repeat") + 
@@ -24,29 +25,20 @@ export class InifinitBackground extends Layer{
         Css.heightPercent("100") + 
         Css.margin("auto")
 
-        if(this.backgroundImage != ""){
-           this.css += Css.backgroundImage(this.backgroundImage)
-        }
-
         return this.css
     }
 
-    animate(direction){
+    moveTo(direction){
 
         if(direction === "left") this.backgroundPositionX--;
         if(direction === "right") this.backgroundPositionX++;
         if(direction === "top") this.backgroundPositionY--;
         if(direction === "bottom") this.backgroundPositionY++;
-        
+
         if(direction === "left" || direction === "right") 
             this.element.style.backgroundPositionX = this.backgroundPositionX + "px"
         if(direction === "top" || direction === "bottom") 
             this.element.style.backgroundPositionY = this.backgroundPositionY + "px"
     
     }
-
-    start(direction){
-        this.interval = setInterval(this.animate.bind(this), 33, direction)
-    }
-
 }

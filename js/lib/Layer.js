@@ -1,5 +1,3 @@
-import { Css } from "./Css.js"
-
 export class Layer{
 
     constructor(name, backgroundImage=""){
@@ -18,7 +16,7 @@ export class Layer{
 
     createHtmlElement(){
         
-        this.html = '<figure id="' + this.name + '"></figure>'
+        this.html = '<div id="' + this.name + '"></div>'
         return this.html
 
     }
