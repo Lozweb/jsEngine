@@ -1,6 +1,5 @@
 import { Engine } from "./Engine.js";
 
-let engine = new Engine("game", 800, 600, 1024, 900)
+let engine = new Engine("game", 800, 600, 1200, 800)
 engine.load()
-
-let interval = setInterval(engine.test.bind(engine), 33)
+engine.run()

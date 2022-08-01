@@ -1,4 +1,5 @@
 import { Layer } from "./Layer.js"
+import { InifinitBackground } from "./layer-type/InfinitBackground.js"
 
 export class Background{
     
@@ -10,13 +11,18 @@ export class Background{
 
     addLayer(name, type, backgroundImage, screen){
 
-        let layer = new Layer(name, type, backgroundImage)
+        let layer
+
+        if(type === "infinitBackground"){
+            layer = new InifinitBackground(name, backgroundImage)
+            layer.start('left')
+        }
+            
         let html = layer.createHtmlElement()
         screen.container.innerHTML += html
         layer.element = document.getElementById(name)
         layer.element.style.cssText += layer.configCss()
         this.layers.push(layer)
-
     }
 
 }

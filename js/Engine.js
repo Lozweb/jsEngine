@@ -12,13 +12,12 @@ export class Engine{
         
         this.screen.container.style.cssText += this.screen.configContainer("#000")
         this.background = new Background(this.screen.width, this.screen.height, this.screen)
-        this.background.addLayer("nebuleuse", "bg", Assets.png("nebuleuse"), this.screen)
         
     }
 
-    test(){
+    run(){
 
-        this.background.layers[0].animate('left')
+        this.background.addLayer("nebuleuse", "infinitBackground", Assets.png("nebuleuse"), this.screen)
 
     }
 
