@@ -8,9 +8,9 @@ export class Background{
         this.layers = new Array()
     }
 
-    addLayer(name, backgroundImage, screen){
+    addLayer(name, type, backgroundImage, screen){
 
-        let layer = new Layer(name, backgroundImage)
+        let layer = new Layer(name, type, backgroundImage)
         let html = layer.createHtmlElement()
         screen.container.innerHTML += html
         layer.element = document.getElementById(name)

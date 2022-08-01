@@ -12,7 +12,7 @@ export class Engine{
         
         this.screen.container.style.cssText += this.screen.configContainer("#000")
         this.background = new Background(this.screen.width, this.screen.height, this.screen)
-        this.background.addLayer("nebuleuse", Assets.png("nebuleuse"), this.screen)
+        this.background.addLayer("nebuleuse", "bg", Assets.png("nebuleuse"), this.screen)
         
     }
 

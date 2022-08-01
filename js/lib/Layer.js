@@ -2,8 +2,9 @@ import { Css } from "./Css.js"
 
 export class Layer{
 
-    constructor(name, backgroundImage){
+    constructor(name, type, backgroundImage=""){
         
+        this.type = type
         this.name = name
         this.backgroundImage = backgroundImage
         this.element = null
@@ -16,13 +17,17 @@ export class Layer{
     configCss(){
         
         this.css = 
-            Css.backgroundImage(this.backgroundImage) + 
             Css.backgroundSize("auto 100%") + 
             Css.backgroundPosition(this.backgroundPositionX, this.backgroundPositionY) + 
             Css.backgroundRepeat("repeat") + 
             Css.widthPercent("100") + 
             Css.heightPercent("100") + 
             Css.margin("auto")
+
+            if(this.backgroundImage!= ""){
+               this.css += Css.backgroundImage(this.backgroundImage)
+            }
+
         return this.css
     
     }

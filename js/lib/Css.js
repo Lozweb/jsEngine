@@ -55,21 +55,9 @@ export class Css{
         return 'background-size:' + value + ';'
     }
 
-    /*Position & other*/
+    /*Position*/
     static position(value){
         return 'position:' + value + ';'
-    }
-
-    static overflow(value){
-        return 'overflow:' + value + ';'
-    }
-
-    static zIndex(value){
-        return 'z-index:' + value + ';'
-    }
-
-    static display(value){
-        return 'display: ' + value + ';'
     }
 
     static margin(value){
@@ -88,8 +76,25 @@ export class Css{
         return 'right: ' + value + ';'
     }
 
+    /*other*/
+    static overflow(value){
+        return 'overflow:' + value + ';'
+    }
+
+    static zIndex(value){
+        return 'z-index:' + value + ';'
+    }
+
+    static display(value){
+        return 'display: ' + value + ';'
+    }
+
     static webkitTransform(value){
         return '-webkit-transform: ' + value + ';'
+    }
+
+    static borderRadius(value){
+        return 'border-radius:' + value + ';'
     }
 
 }
