@@ -1,5 +1,6 @@
 import { InifinitBackground } from "./layer-type/InfinitBackground.js"
 import { InfinitStars } from "./layer-type/InfinitStars.js"
+import { Layer } from "./Layer.js"
 
 export class Background{
     
@@ -38,6 +39,8 @@ export class Background{
         if(type === 'infinitStars')
             layer = new InfinitStars(name, container)
         
+        if(type === 'players')
+            layer = new Layer(name, container)
                                                 //get DOMHtmlElement created + config css
         layer.element = document.getElementById(name)
         layer.element.style.cssText += layer.configCss()
