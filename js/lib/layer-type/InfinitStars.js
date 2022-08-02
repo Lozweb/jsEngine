@@ -12,11 +12,10 @@ export class InfinitStars extends Layer{
     configCss(){
 
         this.css = 
-        Css.widthPercent("10") + 
-        Css.heightPercent("5") + 
+        Css.widthPercent("100") + 
+        Css.heightPercent("100") + 
         Css.margin("auto") + 
-        Css.backgroundColor("rgba(255,255,255,0.1)") +
-        Css.borer("1px solid white")
+        Css.position("absolute")
 
         return this.css
     }

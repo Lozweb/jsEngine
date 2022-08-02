@@ -23,7 +23,8 @@ export class InifinitBackground extends Layer{
         Css.backgroundRepeat("repeat") + 
         Css.widthPercent("100") + 
         Css.heightPercent("100") + 
-        Css.margin("auto")
+        Css.margin("auto") + 
+        Css.position("absolute")
 
         return this.css
     }

@@ -20,8 +20,7 @@ export class Engine{
 
     run(){
 
-        //this.background.layers[1].animate("left")
-        //this.background.layers[0].animate()
+        this.background.layers[1].animate("left")
         
     }
 }
