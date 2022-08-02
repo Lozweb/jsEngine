@@ -38,4 +38,19 @@ export class Star{
         return this.css
 
     }
+
+    moveTo(direction){
+
+        if(this.element != null){
+
+            this.element.style.left = this.x + "px"
+            this.element.style.top = this.y + "px"
+
+        }
+        else
+            this.element = document.getElementById(this.id)
+        
+    }
+
+
 }

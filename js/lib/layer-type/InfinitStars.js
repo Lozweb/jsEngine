@@ -9,7 +9,6 @@ export class InfinitStars extends Layer{
 
         super(name)
         this.arrStar = new Array()
-        this.elements = new Array()
         this.container = container
         this.stars = new StarsGenerator(
             parseInt(container.offsetWidth),
@@ -21,7 +20,7 @@ export class InfinitStars extends Layer{
 
     load(){
 
-        while(this.stars.countId < 50){
+        while(this.stars.countId < 10){
 
             this.arrStar.push(this.stars.createRandomStar())
 
@@ -35,7 +34,6 @@ export class InfinitStars extends Layer{
 
             bg.appendChild(this.arrStar[i].element)
             let star = document.getElementById(this.arrStar[i].id)
-            this.elements.push(star)
         }
 
     }
@@ -53,12 +51,54 @@ export class InfinitStars extends Layer{
 
     moveTo(direction){
 
-        for(let i = 0; i < this.elements.length; i++){
+        if(this.arrStar.length > 0){
 
-            this.elements[i].x += this.elements[i].speed
-            //console.log(this.elements[i].x);
+            for(let i = 0; i < this.arrStar.length; i++){
+
+                if(direction === 'bottom')
+                    this.arrStar[i].y += this.arrStar[i].speed
+                if(direction === 'top')
+                    this.arrStar[i].y -= this.arrStar[i].speed
+                if(direction === 'left')
+                    this.arrStar[i].x -= this.arrStar[i].speed
+                if(direction === 'right')
+                    this.arrStar[i].x += this.arrStar[i].speed
+                    
+                this.arrStar[i].moveTo(direction)
+    
+                if(this.isOut(this.arrStar[i]))
+                    this.remove(this.arrStar[i])
+    
+            }
 
         }
+
+    }
+
+    remove(entity){
+
+        console.log(entity.id);
+
+        if(entity != null){
+
+            this.arrStar = this.arrStar.filter(data => data.id != entity.id)
+
+            document.getElementById(entity.id).remove()
+            
+        }
+    }
+
+    isOut(entity){
+
+        if(entity.x > this.width || entity.x < -50){
+            return true;
+        } 
+
+        if(entity.y > this.heigth || entity.y < 0) {
+            return true
+        }
+        
+        else return false
 
     }
     
