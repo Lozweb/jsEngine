@@ -39,7 +39,7 @@ export class Star{
 
     }
 
-    moveTo(direction){
+    setPosition(){
 
         if(this.element != null){
 

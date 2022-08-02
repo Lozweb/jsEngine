@@ -1,6 +1,10 @@
 export class Css{
 
-    /*MinWidht MinHeight*/
+
+    /**
+     * return snippet css property
+     */
+
     static minWidthPx(minWidth){
         return 'min-width:' + minWidth + 'px;'
     }
@@ -17,7 +21,6 @@ export class Css{
         return 'min-height:' + minHeight + '%;'
     }
 
-    /*Width Height*/ 
     static widthPx(width){
         return 'width:' + width + 'px;'
     }
@@ -34,7 +37,6 @@ export class Css{
         return 'height:' + height + '%;'
     }
 
-    /*background*/
     static backgroundColor(color){
         return 'background-color:' + color + ';'
     }
@@ -59,7 +61,6 @@ export class Css{
         return 'opacity:' + value + ';' 
     }
 
-    /*Position*/
     static position(value){
         return 'position:' + value + ';'
     }
@@ -80,7 +81,6 @@ export class Css{
         return 'right: ' + value + ';'
     }
 
-    /*other*/
     static overflow(value){
         return 'overflow:' + value + ';'
     }

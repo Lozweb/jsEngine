@@ -1,12 +1,10 @@
 import { Layer } from "../Layer.js";
 import { Css } from "../Css.js";
 import { StarsGenerator } from "./StarsGenerator.js";
-import { Star } from "./Star.js";
 
 export class InfinitStars extends Layer{
 
     constructor(name, container){
-
         super(name)
         this.arrStar = new Array()
         this.container = container
@@ -19,33 +17,25 @@ export class InfinitStars extends Layer{
     }
 
     load(){
-
-        while(this.stars.countId < 10){
-
+        while(this.stars.countId < 50){
             this.arrStar.push(this.stars.createRandomStar())
-
         }
 
         for(let i = 0; i < this.arrStar.length; i++){
 
             this.arrStar[i].element = this.arrStar[i].createHtmlElement()
-            
             let bg = document.getElementById(this.name)
-
             bg.appendChild(this.arrStar[i].element)
-            let star = document.getElementById(this.arrStar[i].id)
         }
-
+        this.stars.init = false
     }
 
     configCss(){
-
         this.css = 
         Css.widthPercent("100") + 
         Css.heightPercent("100") + 
         Css.margin("auto") + 
         Css.position("absolute")
-
         return this.css
     }
 
@@ -64,42 +54,35 @@ export class InfinitStars extends Layer{
                 if(direction === 'right')
                     this.arrStar[i].x += this.arrStar[i].speed
                     
-                this.arrStar[i].moveTo(direction)
+                this.arrStar[i].setPosition()
     
-                if(this.isOut(this.arrStar[i]))
+                if(this.isOut(this.arrStar[i])){
                     this.remove(this.arrStar[i])
-    
+                    this.addNewStar()
+                }
+                    
             }
-
         }
-
     }
 
     remove(entity){
-
-        console.log(entity.id);
-
         if(entity != null){
-
             this.arrStar = this.arrStar.filter(data => data.id != entity.id)
-
             document.getElementById(entity.id).remove()
-            
         }
     }
 
+    addNewStar(){
+        this.arrStar.push(this.stars.createRandomStar())
+        this.arrStar[this.arrStar.length-1].element = this.arrStar[this.arrStar.length-1].createHtmlElement()
+        let bg = document.getElementById(this.name)
+        bg.appendChild(this.arrStar[this.arrStar.length-1].element)
+    }
+
     isOut(entity){
-
-        if(entity.x > this.width || entity.x < -50){
-            return true;
-        } 
-
-        if(entity.y > this.heigth || entity.y < 0) {
-            return true
-        }
-        
+        if(entity.x > this.width || entity.x < -50) return true;
+        if(entity.y > this.heigth || entity.y < 0) return true
         else return false
-
     }
     
 

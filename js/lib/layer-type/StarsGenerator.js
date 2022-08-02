@@ -7,6 +7,7 @@ export class StarsGenerator{
         this.maxWidth = maxWidth
         this.maxHeigth = maxHeigth
         this.direction = direction
+        this.init = true
         this.colors = [
             '#afc9ff',
             '#c7d8ff',
