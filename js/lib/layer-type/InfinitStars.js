@@ -1,12 +1,43 @@
 import { Layer } from "../Layer.js";
 import { Css } from "../Css.js";
+import { StarsGenerator } from "./StarsGenerator.js";
+import { Star } from "./Star.js";
 
 export class InfinitStars extends Layer{
 
-    constructor(name){
+    constructor(name, container){
+
         super(name)
-        this.count = 1;
-        this.element = null
+        this.arrStar = new Array()
+        this.elements = new Array()
+        this.container = container
+        this.stars = new StarsGenerator(
+            parseInt(container.offsetWidth),
+            parseInt(container.offsetHeight), 
+            'left'
+        )
+        this.load()
+    }
+
+    load(){
+
+        while(this.stars.countId < 50){
+
+            this.arrStar.push(this.stars.createRandomStar())
+
+        }
+
+        for(let i = 0; i < this.arrStar.length; i++){
+
+            this.arrStar[i].element = this.arrStar[i].createHtmlElement()
+            
+            let bg = document.getElementById(this.name)
+
+            bg.appendChild(this.arrStar[i].element)
+            let star = document.getElementById(this.arrStar[i].id)
+            this.elements.push(star)
+        }
+
     }
 
     configCss(){
@@ -20,22 +51,20 @@ export class InfinitStars extends Layer{
         return this.css
     }
 
-    test(){
-        
-        
-        this.count ++;
-        if(this.count/10 === 1){
-            this.element.style.backgroundColor = "#fff"
-            this.count = 1;
-        }
-        else{
-            this.element.style.backgroundColor = "transparent"
+    moveTo(direction){
+
+        for(let i = 0; i < this.elements.length; i++){
+
+            this.elements[i].x += this.elements[i].speed
+            //console.log(this.elements[i].x);
+
         }
 
     }
+    
 
-    animate(){
-        this.interval = setInterval(this.test.bind(this), 33)
+    animate(direction){
+        this.interval = setInterval(this.moveTo.bind(this), 33, direction)
     }
 
 }

@@ -98,7 +98,7 @@ export class Css{
     }
 
     static borderRadius(value){
-        return 'border-radius:' + value + ';'
+        return 'border-radius:' + value + '%;'
     }
 
     static borer(value){

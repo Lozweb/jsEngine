@@ -2,11 +2,9 @@ import { Css } from "./Css.js"
 
 export class Screen{
 
-    constructor(id, minWidth, minHeight, width, height){
+    constructor(id, width, height){
         this.id = id
         this.container = document.getElementById(this.id)
-        this.minWidth = minWidth
-        this.minHeight = minHeight
         this.width = width
         this.height = height
     }
@@ -25,8 +23,6 @@ export class Screen{
     configContainer(color){
 
         this.css = 
-            Css.minWidthPx(this.minWidth) + 
-            Css.minHeightPx(this.minHeight) + 
             Css.widthPx(this.width) + 
             Css.heightPx(this.height) +  
             Css.position('absolute') + 
@@ -36,7 +32,6 @@ export class Screen{
             Css.margin('auto') + 
             Css.top('50%') + 
             Css.left('0') + 
-            Css.right('0') + 
             Css.webkitTransform('translateY(-50%)')
 
         return this.css

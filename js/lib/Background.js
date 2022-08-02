@@ -13,16 +13,16 @@ export class Background{
 
         let layer
 
-        if(type === "infinitBackground")
-            layer = new InifinitBackground(name, backgroundImage)
-        
-        if(type === 'infinitStars')
-            layer = new InfinitStars(name)
-        
         let div = document.createElement('div')
         div.setAttribute("id", name)
         container.appendChild(div)
 
+        if(type === "infinitBackground")
+            layer = new InifinitBackground(name, backgroundImage)
+        
+        if(type === 'infinitStars')
+            layer = new InfinitStars(name, container)
+        
         layer.element = document.getElementById(name)
         layer.element.style.cssText += layer.configCss()
 

@@ -4,8 +4,10 @@ import { Assets } from "./lib/Assets.js"
 
 export class Engine{
 
-    constructor(id, minWidth, minHeight, width, height){
-        this.screen = new Screen(id, minWidth, minHeight, width, height)
+    constructor(id, width, height){
+        this.width = width
+        this.height = height
+        this.screen = new Screen(id, width, height)
         this.pos = 0;
     }
 
@@ -21,6 +23,7 @@ export class Engine{
     run(){
 
         this.background.layers[1].animate("left")
+        this.background.layers[0].animate("left")
         
     }
 }
