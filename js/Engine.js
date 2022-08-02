@@ -54,6 +54,8 @@ export class Engine{
         let coord = this.player.getPosition()
         this.player.X = coord[0]
         this.player.Y = coord[1]
+
+        this.player.animate()
         
     }
 

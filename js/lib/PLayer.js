@@ -20,13 +20,12 @@ export class Player{
             right : false
         }
 
+        this.interval = null
+
         document.addEventListener('keydown', () => {
             this.keyDown(event, this)
         })
 
-        document.addEventListener('keyup', () => {
-            this.keyUp(event, this)
-        })
     }
 
     configCss(){
@@ -49,41 +48,17 @@ export class Player{
         return this.element
     }
 
-    keyDown(event, player){
-
-        if(event.keyCode == 81) player.direction.left = true  
-        if(event.keyCode == 68) player.direction.right = true
-        if(event.keyCode == 90) player.direction.up = true
-        if(event.keyCode == 83) player.direction.down = true
-            
-        this.setPosition(player.direction)
+    keyDown(event){
+        //set loop with function to watch keyboard
+        console.log(event.keyCode);
+        if(event.keyCode == 37) this.X -= this.speed
+        else if(event.keyCode == 39) this.X += this.speed
+        else if(event.keyCode == 38) this.Y -= this.speed
+        else if(event.keyCode == 40) this.Y += this.speed
     }
 
-    keyUp(event, player){
-        if(event.keyCode == 81) player.direction.left = false
-        if(event.keyCode == 68) player.direction.right = false
-        if(event.keyCode == 90) player.direction.up = false
-        if(event.keyCode == 83) player.direction.down = false
-    }
 
-    setPosition(direction){
-
-        if(direction.up){
-            this.Y -= this.speed
-        }
-        if(direction.down){
-            this.Y += this.speed
-        }
-        if(direction.left){
-            this.X -= this.speed
-        }
-        if(direction.right){
-            this.X += this.speed
-        }
-        this.moveTo(this.X, this.Y)
-    }
-
-    moveTo(x, y){
+    moveTo(){
 
         this.element.style.left = this.X + "px"
         this.element.style.top = this.Y + "px"
@@ -95,6 +70,10 @@ export class Player{
         let style = window.getComputedStyle(this.element)
         return [parseInt(style.getPropertyValue('left')), parseInt(style.getPropertyValue('top'))]
 
+    }
+
+    animate(){
+        this.interval = setInterval(this.moveTo.bind(this), 33)
     }
 
 }
