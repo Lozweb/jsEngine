@@ -51,6 +51,7 @@ export class Engine{
 
         this.background.layers[0].animate("left")
         this.background.layers[1].animate("left")
+        
         let coord = this.player.getPosition()
         this.player.X = coord[0]
         this.player.Y = coord[1]

@@ -25,6 +25,9 @@ export class Player{
         document.addEventListener('keydown', () => {
             this.keyDown(event, this)
         })
+        document.addEventListener('keyup', () => {
+            this.keyUp(event, this)
+        })
 
     }
 
@@ -48,21 +51,29 @@ export class Player{
         return this.element
     }
 
-    keyDown(event){
-        //set loop with function to watch keyboard
-        console.log(event.keyCode);
-        if(event.keyCode == 37) this.X -= this.speed
-        else if(event.keyCode == 39) this.X += this.speed
-        else if(event.keyCode == 38) this.Y -= this.speed
-        else if(event.keyCode == 40) this.Y += this.speed
+    keyDown(event, player){
+        if(event.keyCode == 81) player.direction.left = true
+        else if(event.keyCode == 68) player.direction.right = true
+        else if(event.keyCode == 90) player.direction.up = true
+        else if(event.keyCode == 83) player.direction.down = true
+    }
+
+    keyUp(event, player){
+        if(event.keyCode == 81) player.direction.left = false
+        else if(event.keyCode == 68) player.direction.right = false
+        else if(event.keyCode == 90) player.direction.up = false
+        else if(event.keyCode == 83) player.direction.down = false
     }
 
 
     moveTo(){
+        if(this.direction.left) this.X -= this.speed
+        if(this.direction.right) this.X += this.speed
+        if(this.direction.up) this.Y -= this.speed
+        if(this.direction.down) this.Y += this.speed
 
         this.element.style.left = this.X + "px"
         this.element.style.top = this.Y + "px"
-        
     }
 
     getPosition(){
