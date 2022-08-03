@@ -20,6 +20,16 @@ export class Player{
             right : false
         }
 
+        this.screenSize = {
+            width: 0 ,
+            height : 0
+        }
+
+        this.playerSize = {
+            width : 30, 
+            height : 20
+        }
+
         this.interval = null
 
         document.addEventListener('keydown', () => {
@@ -33,12 +43,13 @@ export class Player{
 
     configCss(){
         this.css = 
-            Css.widthPx(30) + 
-            Css.heightPx(20) + 
+            Css.widthPx(this.playerSize.width) + 
+            Css.heightPx(this.playerSize.height) + 
             Css.backgroundColor('#fff') + 
             Css.position('absolute') + 
             Css.top('50%') + 
-            Css.left('5%')
+            Css.left('5%') + 
+            Css.margin('0')
 
         return this.css
     }
@@ -57,7 +68,7 @@ export class Player{
         else if(event.keyCode == 90) player.direction.up = true
         else if(event.keyCode == 83) player.direction.down = true
     }
-
+    //81:Q 68:D 90:Z 83:S
     keyUp(event, player){
         if(event.keyCode == 81) player.direction.left = false
         else if(event.keyCode == 68) player.direction.right = false
@@ -67,13 +78,23 @@ export class Player{
 
 
     moveTo(){
+
+        //move
         if(this.direction.left) this.X -= this.speed
         if(this.direction.right) this.X += this.speed
         if(this.direction.up) this.Y -= this.speed
         if(this.direction.down) this.Y += this.speed
 
+        //check if out screen
+        if(this.X < 0) this.X = 0
+        if(this.Y < 0) this.Y = 0
+        if(this.X > this.screenSize.width-this.playerSize.width)  this.X = this.screenSize.width - this.playerSize.width
+        if(this.Y > this.screenSize.height-this.playerSize.height) this.Y = this.screenSize.height - this.playerSize.height
+
+        //set position
         this.element.style.left = this.X + "px"
-        this.element.style.top = this.Y + "px"
+        this.element.style.top = this.Y + "px"      
+        
     }
 
     getPosition(){
@@ -83,8 +104,14 @@ export class Player{
 
     }
 
+    getSize(){
+        this.screenSize.width = document.getElementById(this.id).parentNode.parentElement.clientWidth
+        this.screenSize.height = document.getElementById(this.id).parentNode.parentElement.clientHeight
+    }
+
     animate(){
         this.interval = setInterval(this.moveTo.bind(this), 33)
+        this.getSize()
     }
 
 }
