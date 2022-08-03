@@ -1,7 +1,8 @@
 import { Screen } from "./lib/Screen.js"
 import { Background } from "./lib/Background.js"
 import { Assets } from "./lib/Assets.js"
-import { Player } from "./lib/PLayer.js"
+import { Player } from "./Entities/PLayer.js"
+import { Starchip } from "./Entities/Starchip.js"
 
 export class Engine{
 
@@ -9,14 +10,14 @@ export class Engine{
         this.width = width
         this.height = height
         this.screen = new Screen(id, width, height)
-        this.pos = 0
-        this.up = false
-        this.down = false
-        this.left = false
-        this.right = false
-        this.checkInput = null
+
         this.player = new Player('player')
         this.player.createHtmlElement()
+
+        this.starchip = new Starchip('starchip')
+        this.starchip.createHtmlElement()
+
+        this.loopControl = null
     }
 
 
@@ -31,6 +32,7 @@ export class Engine{
 
 
     load(){
+
         this.screen.container.style.cssText += this.screen.configContainer("#000")
         this.background = new Background(this.screen.width, this.screen.height, this.screen)
         
@@ -38,6 +40,7 @@ export class Engine{
         this.background.addLayer("nebuleuse", "infinitBackground", this.screen.container, Assets.png("nebuleuse"))
         this.background.addLayer("entities", "players", this.screen.container)
         this.background.layers[2].addEntity(this.player.element)
+        this.background.layers[2].addEntity(this.starchip.element)
                         
     }
 
@@ -52,12 +55,33 @@ export class Engine{
         this.background.layers[0].animate("left")
         this.background.layers[1].animate("left")
         
-        let coord = this.player.getPosition()
-        this.player.X = coord[0]
-        this.player.Y = coord[1]
-
+        this.player.getPosition()
         this.player.animate()
+        this.starchip.getPosition()
         
+        let inter = setInterval(this.loop.bind(this), 33)
+    }
+
+    loop(){
+
+        let colid = function(rect1, rect2){
+
+            if (rect1.x < rect2.x + rect2.width &&
+                rect1.x + rect1.width > rect2.x &&
+                rect1.y < rect2.y + rect2.height &&
+                rect1.height + rect1.y > rect2.y) 
+            {
+                    return true
+            }
+            else return false
+                
+
+        }
+
+        if(colid(this.player.getRect(), this.starchip.getRect())){
+            console.log('Collision !');
+        }
+
     }
 
 }

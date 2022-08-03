@@ -1,4 +1,5 @@
-import { Css } from "./Css.js"
+import { Assets } from "../lib/Assets.js"
+import { Css } from "../lib/Css.js"
 
 export class Player{
 
@@ -11,7 +12,7 @@ export class Player{
         this.X = 0
         this.Y = 0
 
-        this.speed = 10;
+        this.speed = 5;
 
         this.direction = {
             up : false,
@@ -26,8 +27,8 @@ export class Player{
         }
 
         this.playerSize = {
-            width : 30, 
-            height : 20
+            width : 64, 
+            height : 36
         }
 
         this.interval = null
@@ -45,12 +46,14 @@ export class Player{
         this.css = 
             Css.widthPx(this.playerSize.width) + 
             Css.heightPx(this.playerSize.height) + 
-            Css.backgroundColor('#fff') + 
+            Css.backgroundColor('none') + 
             Css.position('absolute') + 
             Css.top('50%') + 
             Css.left('5%') + 
-            Css.margin('0')
-
+            Css.margin('0') + 
+            Css.backgroundImage(Assets.png('player_plane')) +
+            Css.backgroundPositionX(0) +
+            Css.backgroundPositionY(-14)
         return this.css
     }
 
@@ -64,16 +67,39 @@ export class Player{
 
     keyDown(event, player){
         if(event.keyCode == 81) player.direction.left = true
+
         else if(event.keyCode == 68) player.direction.right = true
-        else if(event.keyCode == 90) player.direction.up = true
-        else if(event.keyCode == 83) player.direction.down = true
+
+        else if(event.keyCode == 90) {
+            player.direction.up = true
+            this.element.style.backgroundPositionX = "192px"
+        }
+
+        else if(event.keyCode == 83) {
+            player.direction.down = true
+            this.element.style.backgroundPositionX = "64px"
+        }
+
     }
+
     //81:Q 68:D 90:Z 83:S
+
     keyUp(event, player){
+
         if(event.keyCode == 81) player.direction.left = false
         else if(event.keyCode == 68) player.direction.right = false
-        else if(event.keyCode == 90) player.direction.up = false
-        else if(event.keyCode == 83) player.direction.down = false
+
+
+        else if(event.keyCode == 90){
+            player.direction.up = false
+            this.element.style.backgroundPositionX = "0"
+            this.element.style.backgroundPositionY = "-14px"
+        } 
+        else if(event.keyCode == 83){
+            player.direction.down = false
+            this.element.style.backgroundPositionX = "0"
+            this.element.style.backgroundPositionY = "-14px"
+        } 
     }
 
 
@@ -100,7 +126,9 @@ export class Player{
     getPosition(){
 
         let style = window.getComputedStyle(this.element)
-        return [parseInt(style.getPropertyValue('left')), parseInt(style.getPropertyValue('top'))]
+        this.X = parseInt(style.getPropertyValue('left'))
+        this.Y = parseInt(style.getPropertyValue('top'))
+        return [this.X, this.Y]
 
     }
 
@@ -112,6 +140,11 @@ export class Player{
     animate(){
         this.interval = setInterval(this.moveTo.bind(this), 33)
         this.getSize()
+    }
+
+    getRect(){
+        //value + & - calcule bouding box plus fidèle au rendu du vaisseau
+        return {x:this.X, y:this.Y + 5, width: this.playerSize.width - 5, height: this.playerSize.height-10}
     }
 
 }

@@ -53,6 +53,14 @@ export class Css{
         return 'background-position:' + x + ' ' + y + ';'
     }
 
+    static backgroundPositionX(value){
+        return 'background-position-x: ' + value + 'px;'
+    }
+
+    static backgroundPositionY(value){
+        return 'background-position-y: ' + value + 'px;'
+    }
+
     static backgroundSize(value){
         return 'background-size:' + value + ';'
     }
