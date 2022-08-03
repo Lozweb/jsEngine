@@ -40,7 +40,7 @@ export class Engine{
         this.background.addLayer("nebuleuse", "infinitBackground", this.screen.container, Assets.png("nebuleuse"))
         this.background.addLayer("entities", "players", this.screen.container)
         this.background.layers[2].addEntity(this.player.element)
-        this.background.layers[2].addEntity(this.starchip.element)
+        //this.background.layers[2].addEntity(this.starchip.element)
                         
     }
 

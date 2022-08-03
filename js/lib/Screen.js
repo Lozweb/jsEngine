@@ -46,7 +46,8 @@ export class Screen{
             Css.margin('auto') + 
             Css.top('50%') + 
             Css.left('50%') + 
-            Css.webkitTransform('translateY(-50%) translateX(-50%)')
+            Css.webkitTransform('translateY(-50%) translateX(-50%)') + 
+            Css.borer('1px solid #021e0b')
 
         return this.css
         
