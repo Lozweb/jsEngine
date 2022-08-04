@@ -1,3 +1,4 @@
+import { Assets } from "../lib/Assets.js";
 import { Css } from "../lib/Css.js";
 
 export class Starchip{
@@ -11,12 +12,16 @@ export class Starchip{
         this.X = x
         this.Y = y
 
-        this.speed = 10
+        this.speed = 5
 
         this.size = {
-            width: 30, 
-            height: 20
+            width: 64, 
+            height: 64
         }
+
+        this.interval = null
+
+        this.coef = 0
 
     }
 
@@ -24,11 +29,14 @@ export class Starchip{
         this.css = 
             Css.widthPx(this.size.width) + 
             Css.heightPx(this.size.height) + 
-            Css.backgroundColor('red') +
+            Css.backgroundColor('none') +
             Css.position('absolute') + 
             Css.margin('0') +
             Css.top(this.Y + 'px') + 
-            Css.left(this.X + 'px')
+            Css.left(this.X + 'px') + 
+            Css.backgroundImage(Assets.png('ennemy')) + 
+            Css.backgroundPositionX(0) + 
+            Css.backgroundPositionY(0)
         return this.css
     }
 
@@ -41,7 +49,7 @@ export class Starchip{
     }
 
     getRect(){
-        return {x:this.X, y:this.Y, width: this.size.width, height: this.size.height}
+        return {x:this.X+20, y:this.Y+17, width: this.size.width-42, height: this.size.height-36}
     }
 
     getPosition(){
@@ -51,6 +59,27 @@ export class Starchip{
         this.Y = parseInt(style.getPropertyValue('top'))
         return [this.X, this.Y]
 
+    }
+
+    animate(comportement){
+        if(comportement === "straight") this.interval = setInterval(this.straight.bind(this), 33)
+        if(comportement === "sinus") this.interval = setInterval(this.sinus.bind(this), 33)
+    }
+
+    straight(){
+        this.X -= this.speed
+        this.element.style.left = this.X + "px"
+    }
+
+    sinus(){
+        this.speed = 5
+        this.X -= this.speed
+
+        this.coef += 0.02
+        this.Y = (Math.sin(this.coef)*698)
+
+        this.element.style.left = this.X + "px"
+        this.element.style.top = this.Y + "px"
     }
 
 }

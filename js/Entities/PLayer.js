@@ -12,7 +12,7 @@ export class Player{
         this.X = 0
         this.Y = 0
 
-        this.speed = 5;
+        this.speed = 10;
 
         this.direction = {
             up : false,
