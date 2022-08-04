@@ -11,22 +11,10 @@ export class Engine{
         this.width = width
         this.height = height
         this.screen = new Screen(id, this.width, this.height)
-
-        this.player = new Player('player')
-        this.player.createHtmlElement()
-
-        this.en1 = new Starchip('en1', this.width-50, 450)
-        this.en1.createHtmlElement()
-
-        this.en2 = new Starchip('en2', this.width -50, 300)
-        this.en2.createHtmlElement()
-
-
         this.loopControl = null
-
         this.playerHits = new Collision()
-
         this.EnemiesArray = new Array()
+
         //faire une class enemies manager qui load un json
         //json => liste des ennemies à faire apparaitre
         //avec timer, type, position, comportement
@@ -45,6 +33,18 @@ export class Engine{
 
     load(){
 
+
+        this.player = new Player('player')
+        this.player.createHtmlElement()
+
+        this.en1 = new Starchip('en1', this.width-50, 450)
+        this.en1.createHtmlElement()
+
+        this.en2 = new Starchip('en2', this.width -50, 300)
+        this.en2.createHtmlElement()
+
+ 
+
         this.screen.container.style.cssText += this.screen.configContainer("#000")
         this.background = new Background(this.screen.width, this.screen.height, this.screen)
         
@@ -53,6 +53,7 @@ export class Engine{
         this.background.addLayer("entities", "none", this.screen.container)
         this.background.layers[2].addEntity(this.player.element)
 
+        this.player.layer = this.background.layers[2]
         //faire appel à ennemies manager 
         this.background.layers[2].addEntity(this.en1.element)
 
@@ -82,17 +83,42 @@ export class Engine{
         this.EnemiesArray.push(this.en2)
 
         this.en1.animate("sinus")
-        
-        this.en2.animate("straight")
+    
         
         let inter = setInterval(this.loop.bind(this), 33)
     }
 
     loop(){
 
-        for(let i = 0; i < this.EnemiesArray.length; i++){
-            if(this.playerHits.checkCollision(this.player.getRect(), this.EnemiesArray[i].getRect())){
-                console.log('Collision !');
+
+
+        if(this.player.shootArray.length > 0){
+
+            for(let i = 0; i < this.player.shootArray.length; i++){
+
+                
+                //check if player shoot isOut of screen
+                if(this.player.shootArray[i].X > this.width){
+
+                    this.player.removeShoot(this.player.shootArray[i])
+
+                }
+            }
+        }
+
+        if(this.EnemiesArray.length > 0 ){
+
+            for(let i = 0; i < this.EnemiesArray.length; i++){
+
+                //check player collision with ennemies
+                if(this.playerHits.checkCollision(this.player.getRect(), this.EnemiesArray[i].getRect())){
+                    
+                    console.log('Collision !');
+                
+                }
+    
+                //add remove ennemies if is out
+    
             }
         }
 

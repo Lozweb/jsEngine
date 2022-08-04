@@ -85,8 +85,4 @@ export class Starchip{
         this.element.style.left = this.X + "px"
         this.element.style.top = this.Y + "px"
     }
-
-    sleep(ms){
-        return new Promise(resolve => setTimeout(resolve, ms))
-    }
 }

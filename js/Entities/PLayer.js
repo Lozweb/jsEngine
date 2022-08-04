@@ -1,5 +1,6 @@
 import { Assets } from "../lib/Assets.js"
 import { Css } from "../lib/Css.js"
+import { Shoot } from "./Shoot.js"
 
 export class Player{
 
@@ -18,7 +19,7 @@ export class Player{
             up : false,
             down : false,
             left : false,
-            right : false
+            right : false, 
         }
 
         this.screenSize = {
@@ -39,6 +40,12 @@ export class Player{
         document.addEventListener('keyup', () => {
             this.keyUp(event, this)
         })
+
+        this.shootCount = 0
+
+        this.layer = null
+
+        this.shootArray = new Array()
 
     }
 
@@ -66,6 +73,7 @@ export class Player{
     }
 
     keyDown(event, player){
+
         if(event.keyCode == 81) player.direction.left = true
 
         else if(event.keyCode == 68) player.direction.right = true
@@ -82,24 +90,26 @@ export class Player{
 
     }
 
-    //81:Q 68:D 90:Z 83:S
+    //81:Q 68:D 90:Z 83:S 32:space
 
     keyUp(event, player){
 
         if(event.keyCode == 81) player.direction.left = false
-        else if(event.keyCode == 68) player.direction.right = false
 
+        if(event.keyCode == 68) player.direction.right = false
 
-        else if(event.keyCode == 90){
+        if(event.keyCode == 90){
             player.direction.up = false
             this.element.style.backgroundPositionX = "0"
             this.element.style.backgroundPositionY = "-14px"
         } 
-        else if(event.keyCode == 83){
+        if(event.keyCode == 83){
             player.direction.down = false
             this.element.style.backgroundPositionX = "0"
             this.element.style.backgroundPositionY = "-14px"
         } 
+
+        if(event.keyCode == 32) this.shoot()
     }
 
 
@@ -145,6 +155,27 @@ export class Player{
     getRect(){
         //value + & - calcule bouding box plus fidèle au rendu du vaisseau
         return {x:this.X, y:this.Y + 5, width: this.playerSize.width - 5, height: this.playerSize.height-10}
+    }
+
+    shoot(){
+        let shoot = new Shoot(this.shootCount, this.X, this.Y)
+        shoot.createHtmlElement()
+        this.shootCount ++
+        this.layer.addEntity(shoot.element)
+        shoot.animate()
+        this.shootArray.push(shoot)
+        
+        console.log(this.shootArray);
+    }
+
+    removeShoot(entity){
+
+        if(entity != null){
+            this.shootArray = this.shootArray.filter(data => data.id != entity.id)
+            document.getElementById(entity.id).remove()
+            console.log('remove : ' + entity);
+        }
+
     }
 
 }
