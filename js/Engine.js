@@ -18,7 +18,7 @@ export class Engine{
         this.en1 = new Starchip('en1', this.width-50, 450)
         this.en1.createHtmlElement()
 
-        this.en2 = new Starchip('en2', this.width -50, 200)
+        this.en2 = new Starchip('en2', this.width -50, 300)
         this.en2.createHtmlElement()
 
 
@@ -55,6 +55,7 @@ export class Engine{
 
         //faire appel à ennemies manager 
         this.background.layers[2].addEntity(this.en1.element)
+
         this.background.layers[2].addEntity(this.en2.element)
                         
     }
@@ -81,6 +82,8 @@ export class Engine{
         this.EnemiesArray.push(this.en2)
 
         this.en1.animate("sinus")
+        
+        this.en2.animate("straight")
         
         let inter = setInterval(this.loop.bind(this), 33)
     }

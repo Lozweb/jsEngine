@@ -21,7 +21,13 @@ export class Starchip{
 
         this.interval = null
 
-        this.coef = 0
+        this.motion = {
+            ampli: 200,
+            speed: 0.02, 
+            deph: 350,
+            tick: 0, 
+            pi: 3.14
+        }
 
     }
 
@@ -53,12 +59,10 @@ export class Starchip{
     }
 
     getPosition(){
-
         let style = window.getComputedStyle(this.element)
         this.X = parseInt(style.getPropertyValue('left'))
         this.Y = parseInt(style.getPropertyValue('top'))
         return [this.X, this.Y]
-
     }
 
     animate(comportement){
@@ -75,11 +79,14 @@ export class Starchip{
         this.speed = 5
         this.X -= this.speed
 
-        this.coef += 0.02
-        this.Y = (Math.sin(this.coef)*698)
+        this.motion.tick ++
+        this.Y = (this.motion.ampli * Math.sin(this.motion.tick*this.motion.speed*this.motion.pi)) + this.motion.deph
 
         this.element.style.left = this.X + "px"
         this.element.style.top = this.Y + "px"
     }
 
+    sleep(ms){
+        return new Promise(resolve => setTimeout(resolve, ms))
+    }
 }
