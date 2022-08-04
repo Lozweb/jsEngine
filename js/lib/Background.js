@@ -39,7 +39,7 @@ export class Background{
         if(type === 'infinitStars')
             layer = new InfinitStars(name, container)
         
-        if(type === 'players')
+        if(type === 'none')
             layer = new Layer(name, container)
                                                 //get DOMHtmlElement created + config css
         layer.element = document.getElementById(name)

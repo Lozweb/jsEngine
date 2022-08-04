@@ -8,6 +8,7 @@ export class Layer{
         this.backgroundImage = backgroundImage
         this.css = ""
         this.element = null
+        
     }
 
     configCss(){

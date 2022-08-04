@@ -3,6 +3,7 @@ import { Background } from "./lib/Background.js"
 import { Assets } from "./lib/Assets.js"
 import { Player } from "./Entities/PLayer.js"
 import { Starchip } from "./Entities/Starchip.js"
+import { Collision } from "./lib/Collision.js"
 
 export class Engine{
 
@@ -14,10 +15,21 @@ export class Engine{
         this.player = new Player('player')
         this.player.createHtmlElement()
 
-        this.starchip = new Starchip('starchip')
-        this.starchip.createHtmlElement()
+        this.en1 = new Starchip('en1', 400, 450)
+        this.en1.createHtmlElement()
+
+        this.en2 = new Starchip('en2', 100, 200)
+        this.en2.createHtmlElement()
+
 
         this.loopControl = null
+
+        this.playerHits = new Collision()
+
+        this.EnemiesArray = new Array()
+        //faire une class enemies manager qui load un json
+        //json => liste des ennemies à faire apparaitre
+        //avec timer, type, position, comportement
     }
 
 
@@ -38,9 +50,12 @@ export class Engine{
         
         this.background.addLayer("stars", "infinitStars", this.screen.container)
         this.background.addLayer("nebuleuse", "infinitBackground", this.screen.container, Assets.png("nebuleuse"))
-        this.background.addLayer("entities", "players", this.screen.container)
+        this.background.addLayer("entities", "none", this.screen.container)
         this.background.layers[2].addEntity(this.player.element)
-        //this.background.layers[2].addEntity(this.starchip.element)
+
+        //faire appel à ennemies manager 
+        this.background.layers[2].addEntity(this.en1.element)
+        this.background.layers[2].addEntity(this.en2.element)
                         
     }
 
@@ -57,29 +72,23 @@ export class Engine{
         
         this.player.getPosition()
         this.player.animate()
-        this.starchip.getPosition()
+
+        //sera effectuer dans l'ennemie manager
+        this.en1.getPosition()
+        this.en2.getPosition()
+
+        this.EnemiesArray.push(this.en1)
+        this.EnemiesArray.push(this.en2)
         
         let inter = setInterval(this.loop.bind(this), 33)
     }
 
     loop(){
 
-        let colid = function(rect1, rect2){
-
-            if (rect1.x < rect2.x + rect2.width &&
-                rect1.x + rect1.width > rect2.x &&
-                rect1.y < rect2.y + rect2.height &&
-                rect1.height + rect1.y > rect2.y) 
-            {
-                    return true
+        for(let i = 0; i < this.EnemiesArray.length; i++){
+            if(this.playerHits.checkCollision(this.player.getRect(), this.EnemiesArray[i].getRect())){
+                console.log('Collision !');
             }
-            else return false
-                
-
-        }
-
-        if(colid(this.player.getRect(), this.starchip.getRect())){
-            console.log('Collision !');
         }
 
     }

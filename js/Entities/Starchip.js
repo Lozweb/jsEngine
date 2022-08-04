@@ -2,14 +2,14 @@ import { Css } from "../lib/Css.js";
 
 export class Starchip{
 
-    constructor(id){
+    constructor(id, x=0, y=0){
 
         this.id = id
         this.css = ""
         this.element = null
 
-        this.X = 0
-        this.Y = 0
+        this.X = x
+        this.Y = y
 
         this.speed = 10
 
@@ -27,8 +27,8 @@ export class Starchip{
             Css.backgroundColor('red') +
             Css.position('absolute') + 
             Css.margin('0') +
-            Css.top('420px') + 
-            Css.left('150px')
+            Css.top(this.Y + 'px') + 
+            Css.left(this.X + 'px')
         return this.css
     }
 
