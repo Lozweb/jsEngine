@@ -37,10 +37,10 @@ export class Engine{
         this.player = new Player('player')
         this.player.createHtmlElement()
 
-        this.en1 = new Starchip('en1', this.width-50, 450)
+        this.en1 = new Starchip('en1', this.width-950, 350)
         this.en1.createHtmlElement()
 
-        this.en2 = new Starchip('en2', this.width -50, 300)
+        this.en2 = new Starchip('en2', this.width -950, 400)
         this.en2.createHtmlElement()
 
  
@@ -54,9 +54,8 @@ export class Engine{
         this.background.layers[2].addEntity(this.player.element)
 
         this.player.layer = this.background.layers[2]
-        //faire appel à ennemies manager 
-        this.background.layers[2].addEntity(this.en1.element)
 
+        this.background.layers[2].addEntity(this.en1.element)
         this.background.layers[2].addEntity(this.en2.element)
                         
     }
@@ -82,7 +81,7 @@ export class Engine{
         this.EnemiesArray.push(this.en1)
         this.EnemiesArray.push(this.en2)
 
-        this.en1.animate("sinus")
+        //this.en1.animate("sinus")
     
         
         let inter = setInterval(this.loop.bind(this), 33)
@@ -90,37 +89,70 @@ export class Engine{
 
     loop(){
 
+        /**
+         * Check collision & Hits
+         */
 
+        for(let i = 0; i < this.EnemiesArray.length; i++){
 
-        if(this.player.shootArray.length > 0){
+            //check player hit ennemies
+            for(let j=0; j < this.player.shootArray.length; j++){
 
-            for(let i = 0; i < this.player.shootArray.length; i++){
-
-                
-                //check if player shoot isOut of screen
-                if(this.player.shootArray[i].X > this.width){
-
-                    this.player.removeShoot(this.player.shootArray[i])
-
-                }
-            }
-        }
-
-        if(this.EnemiesArray.length > 0 ){
-
-            for(let i = 0; i < this.EnemiesArray.length; i++){
-
-                //check player collision with ennemies
-                if(this.playerHits.checkCollision(this.player.getRect(), this.EnemiesArray[i].getRect())){
+                if(this.playerHits.isCollide(
+                    this.player.shootArray[j].getRect(),
+                    this.EnemiesArray[i].getRect()
+                ))
+                {
                     
-                    console.log('Collision !');
-                
+                    console.log('touché');
+                    this.player.removeShoot(this.player.shootArray[j])
+
                 }
-    
-                //add remove ennemies if is out
-    
+
+            }
+
+            //check player collision with ennemies
+            if(this.playerHits.isCollide(
+                this.player.getRect(), 
+                this.EnemiesArray[i].getRect()
+            ))
+            {
+                
+                console.log('Collision !');
+            
             }
         }
+    
+
+        /**
+         * Clean Screen check if entities is out of screen
+         */
+
+        for(let i = 0; i < this.player.shootArray.length; i++){
+
+            //check if player shoot isOut of screen
+            if(this.player.shootArray[i].X > this.width){
+
+                this.player.removeShoot(this.player.shootArray[i])
+
+            }
+        }
+        
+
+
+        for(let j=0; j < this.EnemiesArray.length; j++){
+
+            //check if enemy is out of sreen
+            if(this.EnemiesArray[j].X < 0){
+
+                document.getElementById(this.EnemiesArray[j].id).remove()
+                this.EnemiesArray = this.EnemiesArray.filter(data => data.id != this.EnemiesArray[j].id)
+
+            }
+
+        }
+
+        
 
     }
 

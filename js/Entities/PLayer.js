@@ -13,7 +13,7 @@ export class Player{
         this.X = 0
         this.Y = 0
 
-        this.speed = 10;
+        this.speed = 5;
 
         this.direction = {
             up : false,
@@ -154,7 +154,7 @@ export class Player{
 
     getRect(){
         //value + & - calcule bouding box plus fidèle au rendu du vaisseau
-        return {x:this.X, y:this.Y + 5, width: this.playerSize.width - 5, height: this.playerSize.height-10}
+        return {x:this.X, y:this.Y, width: this.playerSize.width, height: this.playerSize.height}
     }
 
     shoot(){
@@ -164,16 +164,13 @@ export class Player{
         this.layer.addEntity(shoot.element)
         shoot.animate()
         this.shootArray.push(shoot)
-        
-        console.log(this.shootArray);
     }
 
     removeShoot(entity){
 
         if(entity != null){
-            this.shootArray = this.shootArray.filter(data => data.id != entity.id)
             document.getElementById(entity.id).remove()
-            console.log('remove : ' + entity);
+            this.shootArray = this.shootArray.filter(data => data.id != entity.id)
         }
 
     }

@@ -15,8 +15,8 @@ export class Starchip{
         this.speed = 5
 
         this.size = {
-            width: 64, 
-            height: 64
+            width: 23, 
+            height: 27
         }
 
         this.interval = null
@@ -40,9 +40,7 @@ export class Starchip{
             Css.margin('0') +
             Css.top(this.Y + 'px') + 
             Css.left(this.X + 'px') + 
-            Css.backgroundImage(Assets.png('ennemy')) + 
-            Css.backgroundPositionX(0) + 
-            Css.backgroundPositionY(0)
+            Css.backgroundImage(Assets.png('ennemy1')) 
         return this.css
     }
 
@@ -55,7 +53,7 @@ export class Starchip{
     }
 
     getRect(){
-        return {x:this.X+20, y:this.Y+17, width: this.size.width-42, height: this.size.height-36}
+        return {x:this.X, y:this.Y, width: this.size.width, height: this.size.height}
     }
 
     getPosition(){
@@ -70,7 +68,7 @@ export class Starchip{
         if(comportement === "sinus") this.interval = setInterval(this.sinus.bind(this), 33)
     }
 
-    straight(){
+    straight(){ 
         this.X -= this.speed
         this.element.style.left = this.X + "px"
     }

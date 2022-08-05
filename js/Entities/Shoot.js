@@ -8,10 +8,11 @@ export class Shoot{
         this.css = ""
         this.element = null
 
-        this.X = x
-        this.Y = y
+        this.X = x + 40 
+        this.Y = y + 20
+
         this.size = {
-            width: 20, 
+            width: 10, 
             height: 3
         }
 
@@ -24,6 +25,7 @@ export class Shoot{
     configCss(){
 
         this.css =
+            Css.margin(0) + 
             Css.widthPx(this.size.width) + 
             Css.heightPx(this.size.height) + 
             Css.backgroundColor('white') + 
@@ -41,17 +43,8 @@ export class Shoot{
         return this.element
     }
 
-    getPosition(){
-
-        let style = window.getComputedStyle(this.element)
-        this.X = parseInt(style.getPropertyValue('left'))
-        this.Y = parseInt(style.getPropertyValue('top'))
-        return [this.X, this.Y]
-
-    }
-
     getRect(){
-        return {x:this.X, y:this.X, width:this.size.width, height:this.size.height}
+        return {x:this.X, y:this.Y, width:this.size.width, height:this.size.height}
     }
 
     move(){
