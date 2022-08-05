@@ -158,7 +158,7 @@ export class Player{
     }
 
     shoot(){
-        let shoot = new Shoot(this.shootCount, this.X, this.Y)
+        let shoot = new Shoot('shoot' + this.shootCount, this.X, this.Y)
         shoot.createHtmlElement()
         this.shootCount ++
         this.layer.addEntity(shoot.element)
