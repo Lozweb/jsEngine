@@ -1,5 +1,6 @@
 import { Assets } from "../lib/Assets.js";
 import { Css } from "../lib/Css.js";
+import { Explosion } from "./Explosion.js";
 
 export class Starchip{
 
@@ -29,6 +30,9 @@ export class Starchip{
             pi: 3.14
         }
 
+        this.layer = null
+        
+        this.life = 100
     }
 
     configCss(){
@@ -63,17 +67,22 @@ export class Starchip{
         return [this.X, this.Y]
     }
 
-    animate(comportement){
-        if(comportement === "straight") this.interval = setInterval(this.straight.bind(this), 33)
-        if(comportement === "sinus") this.interval = setInterval(this.sinus.bind(this), 33)
+    explosion(id){
+        let explod = new Explosion(id, this.X, this.Y)
+        explod.createHtmlElement()
+        this.layer.addEntity(explod.element)
+        explod.animate()
     }
 
     straight(){ 
+
         this.X -= this.speed
         this.element.style.left = this.X + "px"
+
     }
 
     sinus(){
+
         this.speed = 5
         this.X -= this.speed
 
@@ -82,5 +91,11 @@ export class Starchip{
 
         this.element.style.left = this.X + "px"
         this.element.style.top = this.Y + "px"
+
+    }
+
+    animate(comportement){
+        if(comportement === "straight") this.interval = setInterval(this.straight.bind(this), 33)
+        if(comportement === "sinus") this.interval = setInterval(this.sinus.bind(this), 33)
     }
 }

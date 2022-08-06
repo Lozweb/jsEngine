@@ -57,6 +57,9 @@ export class Engine{
 
         this.background.layers[2].addEntity(this.en1.element)
         this.background.layers[2].addEntity(this.en2.element)
+
+        this.en1.layer = this.background.layers[2]
+        this.en2.layer = this.background.layers[2]
                         
     }
 
@@ -103,9 +106,14 @@ export class Engine{
                     this.EnemiesArray[i].getRect()
                 ))
                 {
-                    
-                    console.log('touché');
                     this.player.removeShoot(this.player.shootArray[j])
+
+                    this.EnemiesArray[i].life -= this.player.power
+
+                    if(this.EnemiesArray[i].life <= 0){
+                        this.EnemiesArray[i].explosion('explos-' + this.EnemiesArray[i].id)
+                        this.EnemiesArray[i].element.style.background = "none"
+                    }
 
                 }
 
@@ -117,9 +125,10 @@ export class Engine{
                 this.EnemiesArray[i].getRect()
             ))
             {
+                if(this.EnemiesArray[i].life > 0){
+                    console.log('Collision !');
+                }
                 
-                console.log('Collision !');
-            
             }
         }
     
@@ -143,7 +152,7 @@ export class Engine{
         for(let j=0; j < this.EnemiesArray.length; j++){
 
             //check if enemy is out of sreen
-            if(this.EnemiesArray[j].X < 0){
+            if(this.EnemiesArray[j].X < 0 || this.EnemiesArray[j].life <= 0){
 
                 document.getElementById(this.EnemiesArray[j].id).remove()
                 this.EnemiesArray = this.EnemiesArray.filter(data => data.id != this.EnemiesArray[j].id)

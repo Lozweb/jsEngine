@@ -34,6 +34,8 @@ export class Player{
 
         this.interval = null
 
+        this.power = 50
+
         document.addEventListener('keydown', () => {
             this.keyDown(event, this)
         })
@@ -153,7 +155,6 @@ export class Player{
     }
 
     getRect(){
-        //value + & - calcule bouding box plus fidèle au rendu du vaisseau
         return {x:this.X, y:this.Y, width: this.playerSize.width, height: this.playerSize.height}
     }
 
