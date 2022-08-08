@@ -158,6 +158,10 @@ export class Player{
         return {x:this.X, y:this.Y, width: this.playerSize.width, height: this.playerSize.height}
     }
 
+    putOn(layer){
+        this.layer = layer
+    }
+
     shoot(){
         let shoot = new Shoot('shoot' + this.shootCount, this.X, this.Y)
         shoot.createHtmlElement()

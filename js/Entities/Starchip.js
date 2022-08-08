@@ -67,11 +67,16 @@ export class Starchip{
         return [this.X, this.Y]
     }
 
+    putOn(layer){
+        this.layer = layer
+    }
+
     explosion(id){
         let explod = new Explosion(id, this.X, this.Y)
         explod.createHtmlElement()
         this.layer.addEntity(explod.element)
         explod.animate()
+        this.element.style.background = "none"
     }
 
     straight(){ 

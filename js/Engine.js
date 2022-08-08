@@ -1,92 +1,68 @@
 import { Screen } from "./lib/Screen.js"
-import { Background } from "./lib/Background.js"
-import { Assets } from "./lib/Assets.js"
 import { Player } from "./Entities/PLayer.js"
 import { Starchip } from "./Entities/Starchip.js"
 import { Collision } from "./lib/Collision.js"
+import { Level } from "./lvl/Level.js"
 
 export class Engine{
 
     constructor(id, width, height){
+
         this.width = width
         this.height = height
         this.screen = new Screen(id, this.width, this.height)
+        this.screen.container.style.cssText += this.screen.configContainer("#000")
+
         this.loopControl = null
         this.playerHits = new Collision()
         this.EnemiesArray = new Array()
 
-        //faire une class enemies manager qui load un json
-        //json => liste des ennemies à faire apparaitre
-        //avec timer, type, position, comportement
+        this.level1 = new Level("level 1", this)
     }
 
-
-    /**
-     * load() : initialise les ressources et les ajoutes à l'écrans
-     * le Background est la <div> principale id="game"
-     * Background(largeur, hauteur, Object{Screen})
-     * background.addLayer(id, type, Object{screen}, facultif(Asset.png(fileName))) => ajoute d'autre <div> 
-     * type => infinitBackground : affiche un cover du png
-     * type => infinitStars : add <figure> dans la <div> des étoiles de différentes tailles et vitesse + couleurs 
-     */
 
 
     load(){
 
-
         this.player = new Player('player')
         this.player.createHtmlElement()
 
-        this.en1 = new Starchip('en1', this.width-950, 350)
+        this.en1 = new Starchip('en1', this.width-50, 350)
         this.en1.createHtmlElement()
 
-        this.en2 = new Starchip('en2', this.width -950, 400)
+        this.en2 = new Starchip('en2', this.width-50, 400)
         this.en2.createHtmlElement()
 
  
-
-        this.screen.container.style.cssText += this.screen.configContainer("#000")
-        this.background = new Background(this.screen.width, this.screen.height, this.screen)
+        this.level1.configLayer()
         
-        this.background.addLayer("stars", "infinitStars", this.screen.container)
-        this.background.addLayer("nebuleuse", "infinitBackground", this.screen.container, Assets.png("nebuleuse"))
-        this.background.addLayer("entities", "none", this.screen.container)
-        this.background.layers[2].addEntity(this.player.element)
+        this.level1.addEntity(this.player.element, 2)
+        this.level1.addEntity(this.en1.element, 2)
+        this.level1.addEntity(this.en2.element, 2)
 
-        this.player.layer = this.background.layers[2]
-
-        this.background.layers[2].addEntity(this.en1.element)
-        this.background.layers[2].addEntity(this.en2.element)
-
-        this.en1.layer = this.background.layers[2]
-        this.en2.layer = this.background.layers[2]
+        this.player.putOn(this.level1.getLayer(2))
+        this.en1.putOn(this.level1.getLayer(2))
+        this.en2.putOn(this.level1.getLayer(2))
                         
     }
 
-    /**
-     * run() :  Permet de lancer les setIntervals des layers se chargeant de l'animation
-     * les Layers type étant des class enfants de Layer, chaque type à rôle et se pilote différeement
-     * animate() : lance le setInterval set sur 33ms ce qui donne environ 30img/s (1000ms / 33ms = 30.3)
-     */
-
     run(){
 
-        this.background.layers[0].animate("left")
-        this.background.layers[1].animate("left")
+        this.level1.animateLayer("left", 0)
+        this.level1.animateLayer("left", 1)
         
         this.player.getPosition()
         this.player.animate()
 
-        //sera effectuer dans l'ennemie manager
         this.en1.getPosition()
+        this.en1.animate("straight")
+
         this.en2.getPosition()
+        this.en2.animate("straight")
 
         this.EnemiesArray.push(this.en1)
         this.EnemiesArray.push(this.en2)
-
-        //this.en1.animate("sinus")
     
-        
         let inter = setInterval(this.loop.bind(this), 33)
     }
 
@@ -107,12 +83,10 @@ export class Engine{
                 ))
                 {
                     this.player.removeShoot(this.player.shootArray[j])
-
                     this.EnemiesArray[i].life -= this.player.power
 
                     if(this.EnemiesArray[i].life <= 0){
                         this.EnemiesArray[i].explosion('explos-' + this.EnemiesArray[i].id)
-                        this.EnemiesArray[i].element.style.background = "none"
                     }
 
                 }
@@ -125,14 +99,16 @@ export class Engine{
                 this.EnemiesArray[i].getRect()
             ))
             {
-                if(this.EnemiesArray[i].life > 0){
-                    console.log('Collision !');
+                console.log('Collision !');
+                this.EnemiesArray[i].life -= this.EnemiesArray[i].life
+
+                if(this.EnemiesArray[i].life <= 0){
+                    this.EnemiesArray[i].explosion('explos-' + this.EnemiesArray[i].id)
                 }
                 
             }
         }
     
-
         /**
          * Clean Screen check if entities is out of screen
          */
@@ -147,11 +123,9 @@ export class Engine{
             }
         }
         
-
-
         for(let j=0; j < this.EnemiesArray.length; j++){
 
-            //check if enemy is out of sreen
+            //check if enemy is out of sreen or dead
             if(this.EnemiesArray[j].X < 0 || this.EnemiesArray[j].life <= 0){
 
                 document.getElementById(this.EnemiesArray[j].id).remove()
@@ -160,8 +134,6 @@ export class Engine{
             }
 
         }
-
-        
 
     }
 
