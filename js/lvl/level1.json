@@ -1,0 +1,75 @@
+{
+    "enemies" : [
+
+        {
+            "X" : 1200,
+            "Y" : 100,
+            "time" : 3,
+            "ia" : "straight"
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 100,
+            "time" : 6,
+            "ia" : "straight"
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 100,
+            "time" : 9,
+            "ia" : "straight"
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 100,
+            "time" : 12,
+            "ia" : "straight"
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 100,
+            "time" : 15,
+            "ia" : "straight"
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 600,
+            "time" : 70,
+            "ia" : "straight"
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 600,
+            "time" : 73,
+            "ia" : "straight"
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 600,
+            "time" : 76,
+            "ia" : "straight"
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 600,
+            "time" : 79,
+            "ia" : "straight"
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 600,
+            "time" : 82,
+            "ia" : "straight"
+        }
+        
+    ]
+}

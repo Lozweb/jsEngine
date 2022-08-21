@@ -4,11 +4,12 @@ import { Explosion } from "./Explosion.js";
 
 export class Starchip{
 
-    constructor(id, x=0, y=0){
+    constructor(id, x=0, y=0, time=0, behaviour="straight"){
 
         this.id = id
         this.css = ""
         this.element = null
+        this.behaviour = behaviour
 
         this.X = x
         this.Y = y
@@ -33,6 +34,8 @@ export class Starchip{
         this.layer = null
         
         this.life = 100
+
+        this.time = time
 
         this.createHtmlElement()
     }
@@ -77,6 +80,11 @@ export class Starchip{
         this.element.style.background = "none"
     }
 
+    animate(){
+        if(this.behaviour === "straight") this.interval = setInterval(this.straight.bind(this), 33)
+        if(this.behaviour === "sinus") this.interval = setInterval(this.sinus.bind(this), 33)
+    }
+
     straight(){ 
 
         this.X -= this.speed
@@ -95,10 +103,5 @@ export class Starchip{
         this.element.style.left = this.X + "px"
         this.element.style.top = this.Y + "px"
 
-    }
-
-    animate(comportement){
-        if(comportement === "straight") this.interval = setInterval(this.straight.bind(this), 33)
-        if(comportement === "sinus") this.interval = setInterval(this.sinus.bind(this), 33)
     }
 }
