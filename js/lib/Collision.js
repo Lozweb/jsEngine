@@ -1,7 +1,7 @@
 export class Collision{
 
-    constructor(){
-
+    constructor(engine){
+        this.engine = engine
     }
 
     isCollide(rect1, rect2){
@@ -13,6 +13,67 @@ export class Collision{
         )
     }
 
-    
+    checkHitsAndCollidEnemies(){
+
+        for(let enemy of this.engine.EnemiesArray){
+
+            //check player hit enemies
+            for(let shoot of this.engine.player.shootArray){
+
+                if(this.isCollide(
+                    shoot.getRect(), 
+                    enemy.getRect()
+                ))
+                {
+                    this.engine.player.removeShoot(shoot)
+                    enemy.life -= this.engine.player.power
+                }
+
+                if(shoot.X > this.engine.width)this.engine.player.removeShoot(shoot)
+
+            }
+
+            //check collid with enemies
+            if(this.isCollide(
+                this.engine.player.getRect(),
+                enemy.getRect()
+            ))
+            {
+                //boss or big enemy will not dead !
+                enemy.life = 0
+            }
+
+            if(enemy.life <= 0) enemy.explosion('explos-' + enemy.id)
+
+        }
+
+    }
+
+    cleanScreen(){
+
+        //clear shoot
+        for(let shoot of this.engine.player.shootArray){
+
+            if(shoot.X > this.engine.width){
+
+                this.engine.player.removeShoot(shoot)
+
+            }
+        
+        }
+
+        //clear enemyheckC
+        for(let enemy of this.engine.EnemiesArray){
+
+            if(enemy.X < 0 || enemy.life <= 0){
+
+                document.getElementById(enemy.id).remove()
+                this.engine.EnemiesArray = this.engine.EnemiesArray.filter(data => data.id != enemy.id)
+
+            }
+
+        }
+
+    }
 
 }

@@ -33,6 +33,8 @@ export class Starchip{
         this.layer = null
         
         this.life = 100
+
+        this.createHtmlElement()
     }
 
     configCss(){
@@ -65,10 +67,6 @@ export class Starchip{
         this.X = parseInt(style.getPropertyValue('left'))
         this.Y = parseInt(style.getPropertyValue('top'))
         return [this.X, this.Y]
-    }
-
-    putOn(layer){
-        this.layer = layer
     }
 
     explosion(id){

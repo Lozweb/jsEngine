@@ -49,6 +49,8 @@ export class Player{
 
         this.shootArray = new Array()
 
+        this.createHtmlElement()
+
     }
 
     configCss(){
@@ -156,10 +158,6 @@ export class Player{
 
     getRect(){
         return {x:this.X, y:this.Y, width: this.playerSize.width, height: this.playerSize.height}
-    }
-
-    putOn(layer){
-        this.layer = layer
     }
 
     shoot(){

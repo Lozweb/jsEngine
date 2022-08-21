@@ -1,6 +1,5 @@
 import { Background } from "../lib/Background.js"
 import { Assets } from "../lib/Assets.js"
-import { Starchip } from "../Entities/Starchip.js"
 
 export class Level{
 
@@ -20,16 +19,9 @@ export class Level{
         this.background.addLayer("entities", "none", this.screen.container)
     }
 
-    addEntity(element, layerIndex){
-        this.background.layers[layerIndex].addEntity(element)
-    }
-
-    getEnemy(id, x, y){
-        return new Starchip(id, x, y)
-    }
-
-    getLayer(layerIndex){
-        return this.background.layers[layerIndex]
+    addEntity(entity, layerIndex){
+        this.background.layers[layerIndex].addEntity(entity.element)
+        entity.layer = this.background.layers[layerIndex]
     }
 
     animateLayer(direction, layerIndex){
