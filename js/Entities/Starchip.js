@@ -1,10 +1,13 @@
 import { Assets } from "../lib/Assets.js";
 import { Css } from "../lib/Css.js";
 import { Explosion } from "./Explosion.js";
+import { Shoot } from "./Shoot.js"
 
 export class Starchip{
 
-    constructor(id, x=0, y=0, time=0, behaviour="straight"){
+    constructor(engine, id, x=0, y=0, time=0, behaviour="straight"){
+
+        this.engine = engine
 
         this.id = id
         this.css = ""
@@ -14,7 +17,7 @@ export class Starchip{
         this.X = x
         this.Y = y
 
-        this.speed = 5
+        this.speed = 10
 
         this.size = {
             width: 23, 
@@ -36,6 +39,8 @@ export class Starchip{
         this.life = 100
 
         this.time = time
+
+        this.shootCount = 0
 
         this.createHtmlElement()
     }
@@ -89,7 +94,9 @@ export class Starchip{
 
         this.X -= this.speed
         this.element.style.left = this.X + "px"
+        this.motion.tick ++
 
+        if(this.motion.tick === 55 && this.life > 0) this.shoot()
     }
 
     sinus(){
@@ -103,5 +110,19 @@ export class Starchip{
         this.element.style.left = this.X + "px"
         this.element.style.top = this.Y + "px"
 
+        if(this.motion.tick === 55 && this.life > 0) this.shoot()
+
     }
+
+    shoot(){
+        let shoot = new Shoot(this.id + 'shoot' + this.shootCount, this.X, this.Y)
+        shoot.speed.x = 5
+        shoot.setShootEnemy(this.engine.player.X, this.engine.player.Y)
+        shoot.createHtmlElementForEnemy()
+        this.shootCount ++
+        this.layer.addEntity(shoot.element)
+        shoot.animate()
+        this.engine.EnemiesShootArray.push(shoot)
+    }
+
 }

@@ -22,6 +22,7 @@ export class EntitiesManager{
         for(let enemy of data["enemies"]){
             this.entities.push(
                 new Starchip(
+                    this.engine,
                     'en' + this.count, 
                     enemy.X, 
                     enemy.Y, 
@@ -37,7 +38,6 @@ export class EntitiesManager{
 
     start(){
 
-        //100ms
         this.timer = setInterval(this.checkAddEnemy.bind(this), 100)
 
     }

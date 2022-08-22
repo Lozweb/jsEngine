@@ -38,7 +38,7 @@ export class StarsGenerator{
 
         }
 
-        var speed = this.getRandom(1, 6)
+        var speed = this.getRandom(1, 4)
 
         var star = new Star(this.countId, x, y, speed)
         star.color = this.getRandomColor()

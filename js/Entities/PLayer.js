@@ -13,7 +13,7 @@ export class Player{
         this.X = 0
         this.Y = 0
 
-        this.speed = 5;
+        this.speed = 20;
 
         this.direction = {
             up : false,
@@ -80,17 +80,19 @@ export class Player{
 
         if(event.keyCode == 81) player.direction.left = true
 
-        else if(event.keyCode == 68) player.direction.right = true
+        if(event.keyCode == 68) player.direction.right = true
 
-        else if(event.keyCode == 90) {
+        if(event.keyCode == 90) {
             player.direction.up = true
             this.element.style.backgroundPositionX = "192px"
         }
 
-        else if(event.keyCode == 83) {
+        if(event.keyCode == 83) {
             player.direction.down = true
             this.element.style.backgroundPositionX = "64px"
         }
+
+        if(event.keyCode == 32) this.shoot()
 
     }
 
@@ -113,7 +115,6 @@ export class Player{
             this.element.style.backgroundPositionY = "-14px"
         } 
 
-        if(event.keyCode == 32) this.shoot()
     }
 
 

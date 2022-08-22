@@ -16,10 +16,13 @@ export class Engine{
         this.control = new Collision(this)
 
         this.EnemiesArray = new Array()
+        this.EnemiesShootArray = new Array()
 
         this.level1 = new Level("level 1", this)
 
         this.entitiesManager = new EntitiesManager(this, 2)
+
+        this.player = null
     }
 
     load(){

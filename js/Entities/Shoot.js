@@ -16,7 +16,31 @@ export class Shoot{
             height: 3
         }
 
-        this.speed = 15
+        this.speed = {
+            x: 30,
+            y: 0
+        }
+
+        this.acc = {
+            x: 0, 
+            y: 0
+        }
+
+        this.ciblePos = {
+            x: 0, 
+            y: 0
+        }
+
+        this.fireDirection = {
+            left: true, 
+            right: false, 
+            up: false, 
+            down: false
+        }
+
+        this.time = 0
+
+        this.enemyShoot = false
 
         this.interval = null
 
@@ -35,6 +59,27 @@ export class Shoot{
         return this.css
     }
 
+    configCssEnemyShoot(){
+        this.css = 
+            Css.margin(0) + 
+            Css.widthPx(8) + 
+            Css.heightPx(8) + 
+            Css.backgroundColor('white') + 
+            Css.position('absolute') + 
+            Css.top(this.Y + 'px') + 
+            Css.left(this.X + 'px') + 
+            Css.borderRadius('50')
+        return this.css
+    }
+
+    createHtmlElementForEnemy(){
+        let shoot = document.createElement('figure')
+        shoot.setAttribute("id", this.id)
+        shoot.style.cssText = this.configCssEnemyShoot()
+        this.element = shoot
+        return this.element
+    }
+
     createHtmlElement(){
         let shoot = document.createElement('figure')
         shoot.setAttribute("id", this.id)
@@ -47,9 +92,58 @@ export class Shoot{
         return {x:this.X, y:this.Y, width:this.size.width, height:this.size.height}
     }
 
+    setShootEnemy(cibleX, cibleY){
+
+        this.enemyShoot = true
+        
+        this.ciblePos.x = cibleX
+        this.ciblePos.y = cibleY
+
+        this.acc.x = this.X/this.speed.x
+        
+        if(this.X > this.ciblePos.x){
+            this.time = (this.X - this.ciblePos.x) / this.acc.x
+            this.fireDirection.left = true
+            this.fireDirection.right = false
+        } 
+        else{
+            this.time = (this.ciblePos.x - this.X) / this.acc.x
+            this.fireDirection.left = false
+            this.fireDirection.right = true
+        } 
+
+        if(this.Y > this.ciblePos.y) {
+            this.acc.y = (this.Y - this.ciblePos.y) / this.time
+            this.fireDirection.up = true
+            this.fireDirection.down = false
+        }
+        else {
+            this.acc.y = (this.ciblePos.y - this.Y) / this.time
+            this.fireDirection.up = false
+            this.fireDirection.down = true
+        }
+
+        this.speed.y = this.Y / this.acc.y
+
+        console.log(this.speed);
+    }
+
     move(){
-        this.X += this.speed
+
+        if(this.enemyShoot){
+
+            if(this.fireDirection.left) this.X -= this.speed.x
+            if(this.fireDirection.right) this.X += this.speed.x
+            if(this.fireDirection.up) this.Y -= this.speed.y
+            if(this.fireDirection.down) this.Y += this.speed.y
+            
+        }
+        else{
+            this.X += this.speed.x
+        }
+        
         this.element.style.left = this.X + "px"
+        this.element.style.top = this.Y + "px"
     }
 
     animate(){
