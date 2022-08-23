@@ -38,6 +38,8 @@ export class Starchip{
         
         this.life = 100
 
+        this.power = 40
+
         this.time = time
 
         this.shootCount = 0
@@ -88,6 +90,7 @@ export class Starchip{
     animate(){
         if(this.behaviour === "straight") this.interval = setInterval(this.straight.bind(this), 33)
         if(this.behaviour === "sinus") this.interval = setInterval(this.sinus.bind(this), 33)
+        this.engine.intervalArray.push(this.interval)
     }
 
     straight(){ 
@@ -115,14 +118,17 @@ export class Starchip{
     }
 
     shoot(){
+
         let shoot = new Shoot(this.id + 'shoot' + this.shootCount, this.X, this.Y)
         shoot.speed.x = 5
+        shoot.power = this.power
         shoot.setShootEnemy(this.engine.player.X, this.engine.player.Y)
         shoot.createHtmlElementForEnemy()
         this.shootCount ++
         this.layer.addEntity(shoot.element)
         shoot.animate()
         this.engine.EnemiesShootArray.push(shoot)
+        
     }
 
 }

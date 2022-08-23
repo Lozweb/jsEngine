@@ -23,6 +23,8 @@ export class Engine{
         this.entitiesManager = new EntitiesManager(this, 2)
 
         this.player = null
+
+        this.intervalArray = new Array()
     }
 
     load(){
@@ -56,7 +58,28 @@ export class Engine{
 
         this.control.checkHitsAndCollidEnemies()
         this.control.cleanScreen()
-    
+        
+        if(this.player.isDead){
+
+            console.log('is Dead')
+
+            clearInterval(this.loopControl)
+            clearInterval(this.player.interval)
+
+            for(let interval of this.intervalArray){
+                clearInterval(interval)
+            }
+
+            for(let shootEn of this.EnemiesShootArray){
+                clearInterval(shootEn.interval)
+            }
+
+            for(let en of this.EnemiesArray){
+                clearInterval(en.interval)
+            }
+
+        }
+
     }
 
 }

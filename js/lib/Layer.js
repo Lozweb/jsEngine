@@ -8,7 +8,7 @@ export class Layer{
         this.backgroundImage = backgroundImage
         this.css = ""
         this.element = null
-        
+        this.interval = null
     }
 
     configCss(){

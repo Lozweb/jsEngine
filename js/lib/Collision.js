@@ -1,3 +1,5 @@
+
+
 export class Collision{
 
     constructor(engine){
@@ -45,6 +47,18 @@ export class Collision{
 
             if(enemy.life <= 0) enemy.explosion('explos-' + enemy.id)
 
+        }
+
+        for(let shootEn of this.engine.EnemiesShootArray){
+            if(this.isCollide(
+                shootEn.getRect(), 
+                this.engine.player.getRect()
+            ))
+            {
+                this.engine.player.damage(shootEn.power)
+                document.getElementById(shootEn.id).remove()
+                this.engine.EnemiesShootArray = this.engine.EnemiesShootArray.filter(data => data.id != shootEn.id)
+            }
         }
 
     }

@@ -8,7 +8,6 @@ export class Level{
         this.engine = engine
         this.screen = this.engine.screen
         this.background = new Background(this.screen.id, this.screen.width, this.screen.height)
-        this.interval = null
     }
 
     configLayer(){
@@ -26,9 +25,6 @@ export class Level{
 
     animateLayer(direction, layerIndex){
         this.background.layers[layerIndex].animate(direction)
-    }
-
-    chronologie(){
-        //setinterval to factory enemy and put on layer
+        this.engine.intervalArray.push(this.background.layers[layerIndex].interval)
     }
 }

@@ -39,7 +39,7 @@ export class EntitiesManager{
     start(){
 
         this.timer = setInterval(this.checkAddEnemy.bind(this), 100)
-
+        this.engine.intervalArray.push(this.timer)
     }
 
     checkAddEnemy(){

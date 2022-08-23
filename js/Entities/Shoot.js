@@ -44,6 +44,8 @@ export class Shoot{
 
         this.interval = null
 
+        this.power = 0
+
     }
 
     configCss(){
@@ -125,7 +127,6 @@ export class Shoot{
 
         this.speed.y = this.Y / this.acc.y
 
-        console.log(this.speed);
     }
 
     move(){

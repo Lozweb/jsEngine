@@ -1,6 +1,7 @@
 import { Assets } from "../lib/Assets.js"
 import { Css } from "../lib/Css.js"
 import { Shoot } from "./Shoot.js"
+import { Explosion } from "./Explosion.js";
 
 export class Player{
 
@@ -13,7 +14,7 @@ export class Player{
         this.X = 0
         this.Y = 0
 
-        this.speed = 20;
+        
 
         this.direction = {
             up : false,
@@ -35,6 +36,11 @@ export class Player{
         this.interval = null
 
         this.power = 50
+        this.life = 100
+        this.speed = 10
+        this.isDead = false
+
+        this.countExplos = 0
 
         document.addEventListener('keydown', () => {
             this.keyDown(event, this)
@@ -54,6 +60,7 @@ export class Player{
     }
 
     configCss(){
+
         this.css = 
             Css.widthPx(this.playerSize.width) + 
             Css.heightPx(this.playerSize.height) + 
@@ -66,14 +73,17 @@ export class Player{
             Css.backgroundPositionX(0) +
             Css.backgroundPositionY(-14)
         return this.css
+
     }
 
     createHtmlElement(){
+
         let player = document.createElement('figure')
         player.setAttribute("id", this.id)
         player.style.cssText = this.configCss()
         this.element = player
         return this.element
+
     }
 
     keyDown(event, player){
@@ -148,26 +158,33 @@ export class Player{
     }
 
     getSize(){
+
         this.screenSize.width = document.getElementById(this.id).parentNode.parentElement.clientWidth
         this.screenSize.height = document.getElementById(this.id).parentNode.parentElement.clientHeight
+    
     }
 
     animate(){
+
         this.interval = setInterval(this.moveTo.bind(this), 33)
         this.getSize()
     }
 
     getRect(){
+
         return {x:this.X, y:this.Y, width: this.playerSize.width, height: this.playerSize.height}
+    
     }
 
     shoot(){
+
         let shoot = new Shoot('shoot' + this.shootCount, this.X, this.Y)
         shoot.createHtmlElement()
         this.shootCount ++
         this.layer.addEntity(shoot.element)
         shoot.animate()
         this.shootArray.push(shoot)
+
     }
 
     removeShoot(entity){
@@ -176,6 +193,18 @@ export class Player{
             document.getElementById(entity.id).remove()
             this.shootArray = this.shootArray.filter(data => data.id != entity.id)
         }
+
+    }
+
+    damage(power){
+
+        this.life -= power
+        console.log(this.life);
+        let explod = new Explosion(this.id + this.countExplos, this.X, this.Y)
+        explod.createHtmlElement()
+        this.layer.addEntity(explod.element)
+        explod.animate()
+        if(this.life === 0 || this.life < 0) this.isDead = true
 
     }
 
