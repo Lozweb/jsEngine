@@ -17,7 +17,7 @@ export class Collision{
 
     checkHitsAndCollidEnemies(){
 
-        for(let enemy of this.engine.EnemiesArray){
+        for(let enemy of this.engine.levelManager.EnemiesArray){
 
             //check player hit enemies
             for(let shoot of this.engine.player.shootArray){
@@ -50,7 +50,7 @@ export class Collision{
 
         }
 
-        for(let shootEn of this.engine.EnemiesShootArray){
+        for(let shootEn of this.engine.levelManager.EnemiesShootArray){
             if(this.isCollide(
                 shootEn.getRect(), 
                 this.engine.player.getRect()
@@ -58,7 +58,7 @@ export class Collision{
             {
                 this.engine.player.damage(shootEn.power)
                 document.getElementById(shootEn.id).remove()
-                this.engine.EnemiesShootArray = this.engine.EnemiesShootArray.filter(data => data.id != shootEn.id)
+                this.engine.levelManager.EnemiesShootArray = this.engine.levelManager.EnemiesShootArray.filter(data => data.id != shootEn.id)
             }
         }
 
@@ -78,22 +78,22 @@ export class Collision{
         }
 
         //clear shoot enemy
-        for(let shootEn of this.engine.EnemiesShootArray){
+        for(let shootEn of this.engine.levelManager.EnemiesShootArray){
 
             if(shootEn.X > this.engine.width || shootEn.X < 0 ||shootEn.Y > this.engine.height || shootEn.Y < 0){
                 document.getElementById(shootEn.id).remove()
-                this.engine.EnemiesShootArray = this.engine.EnemiesShootArray.filter(data => data.id != shootEn.id)
+                this.engine.levelManager.EnemiesShootArray = this.engine.levelManager.EnemiesShootArray.filter(data => data.id != shootEn.id)
             }
 
         }
 
         //clear enemy
-        for(let enemy of this.engine.EnemiesArray){
+        for(let enemy of this.engine.levelManager.EnemiesArray){
 
             if(enemy.X < 0 || enemy.life <= 0){
 
                 document.getElementById(enemy.id).remove()
-                this.engine.EnemiesArray = this.engine.EnemiesArray.filter(data => data.id != enemy.id)
+                this.engine.levelManager.EnemiesArray = this.engine.levelManager.EnemiesArray.filter(data => data.id != enemy.id)
 
             }
 

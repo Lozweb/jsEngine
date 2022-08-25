@@ -66,10 +66,10 @@ export class EntitiesManager{
 
     newEnemy(enemy){
 
-        this.engine.level1.addEntity(enemy, this.layer)
+        this.engine.levelManager.level1.addEntity(enemy, this.layer)
         enemy.getPosition()
         enemy.animate()
-        this.engine.EnemiesArray.push(enemy)
+        this.engine.levelManager.EnemiesArray.push(enemy)
 
     }
     

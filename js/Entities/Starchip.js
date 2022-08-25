@@ -128,7 +128,7 @@ export class Starchip{
         this.shootCount ++
         this.layer.addEntity(shoot.element)
         shoot.animate()
-        this.engine.EnemiesShootArray.push(shoot)
+        this.engine.levelManager.EnemiesShootArray.push(shoot)
         
     }
 
