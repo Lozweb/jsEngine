@@ -83,6 +83,7 @@ export class Starchip{
         this.layer.addEntity(explod.element)
         explod.animate()
         this.element.style.background = "none"
+        this.engine.player.score += this.points
     }
 
     animate(){
@@ -98,7 +99,6 @@ export class Starchip{
         this.motion.tick ++
         
         if(this.motion.tick === 100 && this.life > 0){
-            console.log(this.motion.tick);
             this.shoot()
         } 
     }

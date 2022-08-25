@@ -39,11 +39,32 @@ export class Engine{
 
         this.player = new Player('player')
 
+        let music = document.createElement('audio')
+        music.id = "level-music"
+        music.src = '../js/assets/sound/musics/level.mp3'
+        music.type = 'audio/mpeg'
+        music.preload = 'auto'
+        music.volume = 0.5
+
+        let shootSound = document.createElement('audio')
+        shootSound.id = "shoot-sound"
+        shootSound.src = "../js/assets/sound/fx/laserfire01.ogg"
+        shootSound.type = 'audio/ogg'
+        shootSound.preload = 'auto'
+
+        document.getElementById('game').appendChild(music)
+        document.getElementById('game').appendChild(shootSound)
+        
+        let audio = document.getElementById('level-music')
+        //audio.play()
+
         this.level1.configLayer()
         this.level1.addEntity(this.player, 2)
         this.level1.animateLayer("left", 0)
         this.level1.animateLayer("left", 1)
         
+        this.level1.initLayer(3)
+
         this.player.getPosition()
         this.player.animate()
 
@@ -59,14 +80,15 @@ export class Engine{
         
         if(this.player.isDead){
 
-            console.log('is Dead')
-
             let gameOver = new GameOver('gameOver', '', this)    
             gameOver.removePlayer()
             
             //play sound gameover
             //display score
             //stop anim
+
+
+
             //clean screen 
             
             //if life = 0 => gameOver screen

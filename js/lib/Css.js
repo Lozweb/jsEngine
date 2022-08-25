@@ -41,6 +41,10 @@ export class Css{
         return 'background-color:' + color + ';'
     }
 
+    static color(color){
+        return 'color: ' + color + ';'
+    }
+
     static backgroundImage(url){
         return "background-image: url('" + url + "');"
     }
@@ -77,6 +81,10 @@ export class Css{
         return 'margin:' + value + ';'
     }
 
+    static padding(value){
+        return 'padding: ' + value + ';'
+    }
+
     static top(value){
         return 'top:' + value + ';'
     }
@@ -109,8 +117,12 @@ export class Css{
         return 'border-radius:' + value + '%;'
     }
 
-    static borer(value){
+    static border(value){
         return "border:" + value + ';'
+    }
+
+    static flex(){
+        return "display: flex;"
     }
 
 }

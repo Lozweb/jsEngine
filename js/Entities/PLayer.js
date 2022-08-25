@@ -53,6 +53,11 @@ export class Player{
             this.keyUp(event, this)
         })
 
+        document.addEventListener('keypress', () => 
+        {
+            this.keyPress(event, this)
+        })
+
         this.shootCount = 0
 
         this.layer = null
@@ -106,8 +111,10 @@ export class Player{
             this.element.style.backgroundPositionX = "64px"
         }
 
-        if(event.keyCode == 32) this.shoot()
+    }
 
+    keyPress(event, player){
+        if(event.keyCode == 32) this.shoot()
     }
 
     //81:Q 68:D 90:Z 83:S 32:space
@@ -142,7 +149,7 @@ export class Player{
 
         //check if out screen
         if(this.X < 0) this.X = 0
-        if(this.Y < 0) this.Y = 0
+        if(this.Y < 50) this.Y = 50
         if(this.X > this.screenSize.width-this.playerSize.width)  this.X = this.screenSize.width - this.playerSize.width
         if(this.Y > this.screenSize.height-this.playerSize.height) this.Y = this.screenSize.height - this.playerSize.height
 
@@ -187,6 +194,12 @@ export class Player{
         shoot.createHtmlElement()
         this.shootCount ++
         this.layer.addEntity(shoot.element)
+
+        let audio = document.getElementById('shoot-sound')
+        audio.pause()
+        audio.currentTime = 0
+        audio.play()
+
         shoot.animate()
         this.shootArray.push(shoot)
 
@@ -204,12 +217,14 @@ export class Player{
     damage(power){
 
         this.health -= power
-        console.log(this.health);
         let explod = new Explosion(this.id + this.countExplos, this.X, this.Y)
         explod.createHtmlElement()
         this.layer.addEntity(explod.element)
         explod.animate()
-        if(this.health === 0 || this.health < 0) this.isDead = true
+        if(this.health === 0 || this.health < 0){
+            this.isDead = true
+            this.health = 0
+        } 
 
     }
 

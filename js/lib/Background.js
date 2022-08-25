@@ -24,7 +24,7 @@ export class Background{
      * @param {string} backgroundImage facultatif imageName
      */
 
-    addLayer(name, type, container, backgroundImage=""){
+    addLayer(name, type, container, backgroundImage="", engine){
 
         let layer
 
@@ -44,7 +44,7 @@ export class Background{
             layer = new Layer(name, container)
 
         if(type === 'ath')
-            layer = new Ath(name, container)
+            layer = new Ath(name, container, engine)
                                                             //get DOMHtmlElement created + config css
         layer.element = document.getElementById(name)
         layer.element.style.cssText += layer.configCss()

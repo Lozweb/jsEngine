@@ -9,7 +9,6 @@ export class InifinitBackground extends Layer{
         this.computeStyle = null
         this.backgroundPositionX = 0
         this.backgroundPositionY = 0
-        this.html = ""
         this.css = ""
         this.interval = null
     }

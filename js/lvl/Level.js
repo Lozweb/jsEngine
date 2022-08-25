@@ -16,7 +16,7 @@ export class Level{
         this.background.addLayer("stars", "infinitStars", this.screen.container)
         this.background.addLayer("nebuleuse", "infinitBackground", this.screen.container, Assets.png("nebuleuse"))
         this.background.addLayer("entities", "none", this.screen.container)
-        this.background.addLayer("ath", "ath", this.screen.container)
+        this.background.addLayer("ath", "ath", this.screen.container, '',this.engine)
     }
 
     addEntity(entity, layerIndex){
@@ -27,5 +27,9 @@ export class Level{
     animateLayer(direction, layerIndex){
         this.background.layers[layerIndex].animate(direction)
         this.engine.intervalArray.push(this.background.layers[layerIndex].interval)
+    }
+
+    initLayer(layerIndex){
+        this.background.layers[layerIndex].init()
     }
 }
