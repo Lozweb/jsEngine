@@ -100,32 +100,26 @@ export class Shoot{
         
         this.ciblePos.x = cibleX
         this.ciblePos.y = cibleY
-
-        this.acc.x = this.X/this.speed.x
         
         if(this.X > this.ciblePos.x){
-            this.time = (this.X - this.ciblePos.x) / this.acc.x
             this.fireDirection.left = true
             this.fireDirection.right = false
         } 
         else{
-            this.time = (this.ciblePos.x - this.X) / this.acc.x
             this.fireDirection.left = false
             this.fireDirection.right = true
         } 
 
         if(this.Y > this.ciblePos.y) {
-            this.acc.y = (this.Y - this.ciblePos.y) / this.time
             this.fireDirection.up = true
             this.fireDirection.down = false
         }
         else {
-            this.acc.y = (this.ciblePos.y - this.Y) / this.time
             this.fireDirection.up = false
             this.fireDirection.down = true
         }
 
-        this.speed.y = this.Y / this.acc.y
+        this.speed.y = 1.5
 
     }
 
@@ -133,10 +127,18 @@ export class Shoot{
 
         if(this.enemyShoot){
 
-            if(this.fireDirection.left) this.X -= this.speed.x
-            if(this.fireDirection.right) this.X += this.speed.x
-            if(this.fireDirection.up) this.Y -= this.speed.y
-            if(this.fireDirection.down) this.Y += this.speed.y
+            if(this.fireDirection.left) {
+                this.X -= this.speed.x
+            }
+            if(this.fireDirection.right) {
+                this.X += this.speed.x
+            }
+            if(this.fireDirection.up) {
+                this.Y -= this.speed.y
+            }
+            if(this.fireDirection.down) {
+                this.Y += this.speed.y
+            }
             
         }
         else{

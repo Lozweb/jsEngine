@@ -22,6 +22,10 @@ export class GameOver extends Layer{
             clearInterval(en.interval)
         }
 
+        for(let sound of this.engine.audioManager.audioArray){
+            sound.pause()
+        }
+
     }
 
     cleanScreen(){r
@@ -38,7 +42,7 @@ export class GameOver extends Layer{
         }
 
         for(let layer of this.engine.level1.background.layers){
-            document.getElementById(layer.name).remove()
+            //document.getElementById(layer.name).remove()
         }
 
     }

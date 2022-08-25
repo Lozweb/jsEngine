@@ -114,7 +114,7 @@ export class Player{
     }
 
     keyPress(event, player){
-        if(event.keyCode == 32) this.shoot()
+        if(event.keyCode == 32 && !this.isDead) this.shoot()
     }
 
     //81:Q 68:D 90:Z 83:S 32:space
