@@ -17,7 +17,7 @@ export class Shoot{
         }
 
         this.speed = {
-            x: 30,
+            x: 10,
             y: 0
         }
 
@@ -148,7 +148,7 @@ export class Shoot{
     }
 
     animate(){
-        this.interval = setInterval(this.move.bind(this), 33)
+        this.interval = setInterval(this.move.bind(this), 16)
     }
 
 }

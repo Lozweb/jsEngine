@@ -15,7 +15,9 @@ export class Layer{
         
         this.css = 
             Css.widthPercent(100) + 
-            Css.heightPercent(100) 
+            Css.heightPercent(100) + 
+            Css.margin("auto") + 
+            Css.position("absolute")
         return this.css
     
     }

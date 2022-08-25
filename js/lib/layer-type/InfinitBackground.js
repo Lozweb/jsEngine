@@ -43,7 +43,7 @@ export class InifinitBackground extends Layer{
     }
 
     animate(direction){
-        this.interval = setInterval(this.moveTo.bind(this), 33, direction)
+        this.interval = setInterval(this.moveTo.bind(this), 16, direction)
     }
 
 }

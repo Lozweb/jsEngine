@@ -43,6 +43,7 @@ export class Collision{
             {
                 //boss or big enemy will not dead !
                 enemy.life = 0
+                this.engine.player.damage(40)
             }
 
             if(enemy.life <= 0) enemy.explosion('explos-' + enemy.id)

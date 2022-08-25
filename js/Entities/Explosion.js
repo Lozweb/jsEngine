@@ -32,6 +32,7 @@ export class Explosion{
         Css.left(this.X + 'px') + 
         Css.backgroundImage(Assets.png("explosion")) +
         Css.backgroundPositionX(0)
+        
     return this.css
 
     }
@@ -61,7 +62,7 @@ export class Explosion{
     }
 
     animate(){
-        this.interval = setInterval(this.animBg.bind(this), 120)
+        this.interval = setInterval(this.animBg.bind(this), 80)
     }
 
 }

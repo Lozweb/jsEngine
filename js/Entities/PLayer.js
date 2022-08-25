@@ -36,9 +36,13 @@ export class Player{
         this.interval = null
 
         this.power = 50
-        this.life = 100
-        this.speed = 10
+        this.health = 100
+        this.speed = 5
         this.isDead = false
+        this.life = 3
+        this.continue = 3
+        this.score = 0
+
 
         this.countExplos = 0
 
@@ -166,7 +170,7 @@ export class Player{
 
     animate(){
 
-        this.interval = setInterval(this.moveTo.bind(this), 33)
+        this.interval = setInterval(this.moveTo.bind(this), 16)
         this.getSize()
     }
 
@@ -179,6 +183,7 @@ export class Player{
     shoot(){
 
         let shoot = new Shoot('shoot' + this.shootCount, this.X, this.Y)
+        shoot.speed.x = 15
         shoot.createHtmlElement()
         this.shootCount ++
         this.layer.addEntity(shoot.element)
@@ -198,13 +203,13 @@ export class Player{
 
     damage(power){
 
-        this.life -= power
-        console.log(this.life);
+        this.health -= power
+        console.log(this.health);
         let explod = new Explosion(this.id + this.countExplos, this.X, this.Y)
         explod.createHtmlElement()
         this.layer.addEntity(explod.element)
         explod.animate()
-        if(this.life === 0 || this.life < 0) this.isDead = true
+        if(this.health === 0 || this.health < 0) this.isDead = true
 
     }
 

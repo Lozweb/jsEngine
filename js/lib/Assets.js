@@ -14,6 +14,6 @@ export class Assets{
     //prod path 
      
     //static png(name){
-    //    return '/telechargement/jsEngine/js/assets/img/' + name + '.png'
+      //return '/telechargement/jsEngine/js/assets/img/' + name + '.png'
     //}
 }

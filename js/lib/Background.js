@@ -1,3 +1,4 @@
+import { Ath } from "./layer-type/Ath.js"
 import { InifinitBackground } from "./layer-type/InfinitBackground.js"
 import { InfinitStars } from "./layer-type/InfinitStars.js"
 import { Layer } from "./Layer.js"
@@ -41,7 +42,10 @@ export class Background{
         
         if(type === 'none')
             layer = new Layer(name, container)
-                                                //get DOMHtmlElement created + config css
+
+        if(type === 'ath')
+            layer = new Ath(name, container)
+                                                            //get DOMHtmlElement created + config css
         layer.element = document.getElementById(name)
         layer.element.style.cssText += layer.configCss()
 

@@ -3,6 +3,7 @@ import { Player } from "./Entities/PLayer.js"
 import { EntitiesManager } from "./Entities/EntitiesManager.js"
 import { Collision } from "./lib/Collision.js"
 import { Level } from "./lvl/Level.js"
+import { GameOver } from "./lib/layer-type/GameOver.js" 
 
 export class Engine{
 
@@ -30,10 +31,7 @@ export class Engine{
     load(){
 
         this.screen.container.style.cssText += this.screen.configContainer("#000")
-        
-        fetch('./js/lvl/level1.json')
-        .then(rep => {return rep.json()})
-        .then(jsonData => this.entitiesManager.loadLevel(jsonData))
+        this.entitiesManager.loadLevel('./js/lvl/level1.json')
         
     }
 
@@ -51,7 +49,7 @@ export class Engine{
 
         this.entitiesManager.start()
     
-        this.loopControl = setInterval(this.loop.bind(this), 33)
+        this.loopControl = setInterval(this.loop.bind(this), 16)
     }
 
     loop(){
@@ -63,20 +61,16 @@ export class Engine{
 
             console.log('is Dead')
 
-            clearInterval(this.loopControl)
-            clearInterval(this.player.interval)
-
-            for(let interval of this.intervalArray){
-                clearInterval(interval)
-            }
-
-            for(let shootEn of this.EnemiesShootArray){
-                clearInterval(shootEn.interval)
-            }
-
-            for(let en of this.EnemiesArray){
-                clearInterval(en.interval)
-            }
+            let gameOver = new GameOver('gameOver', '', this)    
+            gameOver.removePlayer()
+            
+            //play sound gameover
+            //display score
+            //stop anim
+            //clean screen 
+            
+            //if life = 0 => gameOver screen
+            //else reload level1, player.life --
 
         }
 

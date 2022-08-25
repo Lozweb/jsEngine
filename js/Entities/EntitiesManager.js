@@ -17,7 +17,14 @@ export class EntitiesManager{
 
     }
 
-    loadLevel(data){
+    loadLevel(file){
+
+        fetch(file)
+        .then(rep => {return rep.json()})
+        .then(jsonData => this.initLevel(jsonData))
+    }
+
+    initLevel(data){
         
         for(let enemy of data["enemies"]){
             this.entities.push(

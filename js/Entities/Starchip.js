@@ -17,7 +17,7 @@ export class Starchip{
         this.X = x
         this.Y = y
 
-        this.speed = 10
+        this.speed = 5
 
         this.size = {
             width: 23, 
@@ -37,12 +37,10 @@ export class Starchip{
         this.layer = null
         
         this.life = 100
-
         this.power = 40
-
         this.time = time
-
         this.shootCount = 0
+        this.points = 100
 
         this.createHtmlElement()
     }
@@ -88,8 +86,8 @@ export class Starchip{
     }
 
     animate(){
-        if(this.behaviour === "straight") this.interval = setInterval(this.straight.bind(this), 33)
-        if(this.behaviour === "sinus") this.interval = setInterval(this.sinus.bind(this), 33)
+        if(this.behaviour === "straight") this.interval = setInterval(this.straight.bind(this), 16)
+        if(this.behaviour === "sinus") this.interval = setInterval(this.sinus.bind(this), 16)
         this.engine.intervalArray.push(this.interval)
     }
 
@@ -98,8 +96,11 @@ export class Starchip{
         this.X -= this.speed
         this.element.style.left = this.X + "px"
         this.motion.tick ++
-
-        if(this.motion.tick === 55 && this.life > 0) this.shoot()
+        
+        if(this.motion.tick === 100 && this.life > 0){
+            console.log(this.motion.tick);
+            this.shoot()
+        } 
     }
 
     sinus(){
