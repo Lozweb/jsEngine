@@ -12,6 +12,10 @@ export class Assets{
       return '../js/assets/img/' + name + '.png'
     }
 
+    static jpg(name){
+      return '../js/assets/img/' + name + '.jpg'
+    }
+
     static fx(name){
       return '../js/assets/sound/fx/' + name + '.ogg'
     }
@@ -26,6 +30,10 @@ export class Assets{
       return '/telechargement/jsEngine/js/assets/img/' + name + '.png'
     }
 
+    static png(name){
+      return '/telechargement/jsEngine/js/assets/img/' + name + '.jpg'
+    }
+
     static fx(name){
       return '/telechargement/jsEngine/js/assets/sound/fx/' + name + '.ogg'
     }
@@ -33,5 +41,6 @@ export class Assets{
     static music(name){
       return '/telechargement/jsEngine/js/assets/sound/musics/' + name + '.mp3'
     }
+
     */
 }

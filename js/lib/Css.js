@@ -125,4 +125,11 @@ export class Css{
         return "display: flex;"
     }
 
+    static textAlign(value){
+        return 'text-align: ' + value + ';'
+    }
+
+    static fontFamily(value){
+        return 'font-family: ' + value + ';'
+    }
 }

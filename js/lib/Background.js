@@ -1,6 +1,7 @@
 import { Ath } from "./layer-type/Ath.js"
 import { InifinitBackground } from "./layer-type/InfinitBackground.js"
 import { InfinitStars } from "./layer-type/InfinitStars.js"
+import { StartScreen } from "./layer-type/StartScreen.js"
 import { Layer } from "./Layer.js"
 
 export class Background{
@@ -42,6 +43,9 @@ export class Background{
         
         if(type === 'none')
             layer = new Layer(name, container)
+
+        if(type === 'menu')
+            layer = new StartScreen(name, backgroundImage)
 
         if(type === 'ath')
             layer = new Ath(name, container, engine)

@@ -29,25 +29,30 @@ export class LevelManager{
 
         //file json for script enemy
         this.entitiesManager.loadLevel(file)
-
-        //data from json
         this.audioManager.addAudioElement('lvl-music', Assets.music('level'), 0.5, 'music')
         this.audioManager.addAudioElement('shoot-sound', Assets.fx('laserfire01'), 1, 'fx')
 
-        this.engine.player = new Player('player')
+    }
 
-        this.level1.configLayer()
+    menu(){
+        
+        this.level1.configMenu()
+        this.level1.initLayer(2)
+        this.level1.animateLayer("left", 0)
+        this.level1.animateLayer("left", 1)
+
     }
 
     start(){
 
-        //data from json
+        this.engine.player = new Player('player')
+
+        this.level1.configLayer()
+
         this.audioManager.playMusic('lvl-music')
 
-        this.level1.animateLayer("left", 0)
-        this.level1.animateLayer("left", 1)
-        this.level1.addEntity(this.engine.player, 2)
-        this.level1.initLayer(3)
+        this.level1.addEntity(this.engine.player, 3)
+        this.level1.initLayer(4)
 
         this.entitiesManager.start()
     

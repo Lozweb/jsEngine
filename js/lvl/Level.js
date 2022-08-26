@@ -12,24 +12,37 @@ export class Level{
 
     configLayer(){
 
-        //json for config layer and level name
-        this.background.addLayer("stars", "infinitStars", this.screen.container)
-        this.background.addLayer("nebuleuse", "infinitBackground", this.screen.container, Assets.png("nebuleuse"))
         this.background.addLayer("entities", "none", this.screen.container)
         this.background.addLayer("ath", "ath", this.screen.container, '',this.engine)
     }
 
+    configMenu(){
+
+        this.background.addLayer("stars", "infinitStars", this.screen.container)
+        this.background.addLayer("nebuleuse", "infinitBackground", this.screen.container, Assets.png("nebuleuse"))
+        this.background.addLayer("menu", "menu", this.screen.container)
+        document.addEventListener('keypress', () => {
+            this.engine.startGame(event, this)
+        })
+        
+    }
+
     addEntity(entity, layerIndex){
+
         this.background.layers[layerIndex].addEntity(entity.element)
         entity.layer = this.background.layers[layerIndex]
+
     }
 
     animateLayer(direction, layerIndex){
+        
         this.background.layers[layerIndex].animate(direction)
         this.engine.intervalArray.push(this.background.layers[layerIndex].interval)
     }
 
     initLayer(layerIndex){
+
         this.background.layers[layerIndex].init()
+        
     }
 }
