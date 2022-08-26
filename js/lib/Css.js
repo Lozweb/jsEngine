@@ -29,6 +29,10 @@ export class Css{
         return 'width:' + width + '%;'
     }
 
+    static widthAuto(){
+        return 'width: auto;'
+    }
+
     static heightPx(height){
         return 'height:' + height + 'px;'
     }

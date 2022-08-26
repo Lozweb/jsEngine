@@ -1,4 +1,5 @@
 import { Ath } from "./layer-type/Ath.js"
+import { GameOver } from "./layer-type/GameOver.js"
 import { InifinitBackground } from "./layer-type/InfinitBackground.js"
 import { InfinitStars } from "./layer-type/InfinitStars.js"
 import { StartScreen } from "./layer-type/StartScreen.js"
@@ -49,6 +50,9 @@ export class Background{
 
         if(type === 'ath')
             layer = new Ath(name, container, engine)
+
+        if(type === 'gameOver')
+            layer = new GameOver(name, backgroundImage, engine)
                                                             //get DOMHtmlElement created + config css
         layer.element = document.getElementById(name)
         layer.element.style.cssText += layer.configCss()

@@ -2,10 +2,3 @@
     font-family: retro;
     src: url(./js/assets/fonts/retro.ttf);
 }
-
-button{
-    width: auto;
-    top:125px;
-    left: 46%;
-    position: relative;
-}

@@ -9,7 +9,7 @@ export class Level{
         this.screen = this.engine.screen
         this.background = new Background(this.screen.id, this.screen.width, this.screen.height)
         this.isInit = true
-        
+
         document.addEventListener('keydown', () => {
             this.engine.player.keyDown(event, this.engine.player)
         })
@@ -36,6 +36,10 @@ export class Level{
         this.background.addLayer("nebuleuse", "infinitBackground", this.screen.container, Assets.png("nebuleuse"))
         this.background.addLayer("menu", "menu", this.screen.container)
         
+    }
+
+    configGameOver(){
+        this.background.addLayer("gameOver", "gameOver", this.screen.container, '', this.engine)
     }
 
     addEntity(entity, layerIndex){

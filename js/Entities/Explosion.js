@@ -60,7 +60,8 @@ export class Explosion{
         this.count ++   
         if(this.count >  5) {
             clearInterval(this.interval)
-            document.getElementById(this.id).remove()
+            if(document.getElementById(this.id) != null)
+                document.getElementById(this.id).remove()
             this.audioManager.stopMusic('explos' + this.id)
             document.getElementById('explos' + this.id).remove()
         }

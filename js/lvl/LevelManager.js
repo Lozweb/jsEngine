@@ -3,7 +3,6 @@ import { Level } from "./Level.js"
 import { AudioManager } from "../lib/AudioManager.js"
 import { Assets } from "../lib/Assets.js"
 import { Player } from "../Entities/PLayer.js"
-import { GameOver } from "../lib/layer-type/GameOver.js"
 
 export class LevelManager{
 
@@ -53,10 +52,9 @@ export class LevelManager{
 
     gameOver(){
 
-        this.engine.gameOver = true
-        this.engine.playing = false
-        let gameOver = new GameOver('gameOver', '', this.engine)   
-
+        this.level1.configGameOver()       
+        this.level1.initLayer(5)
+        
     }
 
 }

@@ -10,6 +10,7 @@ export class StartScreen extends Layer{
         this.logo = null
         this.text = null
         this.start = null
+        this.button = null
     }
 
     configCss(){
@@ -49,6 +50,7 @@ export class StartScreen extends Layer{
             Css.fontFamily('retro') + 
             Css.position('relative') + 
             Css.top('-10px')
+
         this.text.textContent = "Space shooter Sillon Lauzé"
 
         this.start = document.createElement('div')
@@ -63,20 +65,35 @@ export class StartScreen extends Layer{
 
         this.start.textContent = "Press Space to Start"
 
+        this.button = document.createElement('button')
+        this.button.setAttribute('id', 'button')
+        this.button.setAttribute('onclick', 'play()')
+        this.button.style.cssText = 
+            Css.widthAuto() + 
+            Css.left('44%') + 
+            Css.top('200px') +
+            Css.position('relative')
+
+        this.button.textContent = 'Play Intro Music'
         
         this.container.append(this.logo)
         this.container.append(this.text)
         this.container.append(this.start)
+        this.container.append(this.button)
 
         return this.container
     }
 
     addElement(){
+
         let layer = document.getElementById(this.name)
         layer.appendChild(this.createHtmlElement())
+
     }
 
     init(){
+
         this.addElement()
+
     }
 }
