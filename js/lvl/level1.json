@@ -1,74 +1,317 @@
 {
     "enemies" : [
 
+        
         {
             "X" : 1200,
             "Y" : 100,
             "time" : 3,
-            "ia" : "straight"
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
         },
 
         {
             "X" : 1200,
             "Y" : 100,
             "time" : 6,
-            "ia" : "straight"
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
         },
 
         {
             "X" : 1200,
             "Y" : 100,
             "time" : 9,
-            "ia" : "straight"
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
         },
 
         {
             "X" : 1200,
             "Y" : 100,
             "time" : 12,
-            "ia" : "straight"
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
         },
 
         {
             "X" : 1200,
             "Y" : 100,
             "time" : 15,
-            "ia" : "straight"
+            "ia" : "straight",
+            "loot": "1", 
+            "lootType": "speed", 
+            "lootPower": 1
         },
+
+
+
+
+
+
+
 
         {
             "X" : 1200,
             "Y" : 500,
             "time" : 70,
-            "ia" : "straight"
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
         },
 
         {
             "X" : 1200,
             "Y" : 500,
             "time" : 73,
-            "ia" : "straight"
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
         },
 
         {
             "X" : 1200,
             "Y" : 500,
             "time" : 76,
-            "ia" : "straight"
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
         },
 
         {
             "X" : 1200,
             "Y" : 500,
             "time" : 79,
-            "ia" : "straight"
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
         },
 
         {
             "X" : 1200,
             "Y" : 500,
             "time" : 82,
-            "ia" : "straight"
+            "ia" : "straight",
+            "loot": "1", 
+            "lootType": "speed", 
+            "lootPower":1
+        },
+
+
+
+
+
+
+
+
+
+        {
+            "X" : 1200,
+            "Y" : 100,
+            "time" : 137,
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 100,
+            "time" : 139,
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 100,
+            "time" : 142,
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 100,
+            "time" : 145,
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 100,
+            "time" : 148,
+            "ia" : "straight",
+            "loot": "1", 
+            "lootType": "power", 
+            "lootPower": 10
+        },
+
+
+
+
+
+
+
+
+        {
+            "X" : 1200,
+            "Y" : 500,
+            "time" : 203,
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 500,
+            "time" : 206,
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 500,
+            "time" : 209,
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 500,
+            "time" : 212,
+            "ia" : "straight",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 500,
+            "time" : 215,
+            "ia" : "straight",
+            "loot": "1", 
+            "lootType": "power", 
+            "lootPower":10
+        },
+
+
+
+
+
+
+        {
+            "X" : 1200,
+            "Y" : 300,
+            "time" : 270,
+            "ia" : "sinus",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 300,
+            "time" : 273,
+            "ia" : "sinus",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 300,
+            "time" : 276,
+            "ia" : "sinus",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 300,
+            "time" : 279,
+            "ia" : "sinus",
+            "loot": "1", 
+            "lootType": "power", 
+            "lootPower":10
+        },
+
+
+
+
+
+
+        {
+            "X" : 1200,
+            "Y" : 300,
+            "time" : 334,
+            "ia" : "sinus",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 300,
+            "time" : 337,
+            "ia" : "sinus",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 300,
+            "time" : 340,
+            "ia" : "sinus",
+            "loot": "0", 
+            "lootType": "", 
+            "lootPower":0
+        },
+
+        {
+            "X" : 1200,
+            "Y" : 300,
+            "time" : 343,
+            "ia" : "sinus",
+            "loot": "1", 
+            "lootType": "speed", 
+            "lootPower":1
         }
         
     ]

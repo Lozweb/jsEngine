@@ -37,7 +37,7 @@ export class Player{
 
         this.power = 50
         this.health = 100
-        this.speed = 5
+        this.speed = 3
         this.isDead = false
         this.life = 0
         this.continue = 3
@@ -174,27 +174,47 @@ export class Player{
     }
 
     shoot(){
+
         let shoot = new Shoot('shoot' + this.shootCount, this.X, this.Y)
         shoot.speed.x = 15
+        shoot.power = this.power
         shoot.createHtmlElement()
-        this.shootCount ++
+
         this.layer.addEntity(shoot.element)
+
+        shoot.animate()
+
+        this.shootArray.push(shoot)
+
+        if(this.power >= 70){
+
+            let shoot2 = new Shoot('shoot2' + this.shootCount, this.X, this.Y-5)
+            shoot2.speed.x = 15
+            shoot2.power = this.power
+            shoot2.createHtmlElement()
+            this.layer.addEntity(shoot2.element)
+            shoot2.animate()
+            this.shootArray.push(shoot2)
+
+        }
 
         let audio = document.getElementById('shoot-sound')
         audio.pause()
         audio.currentTime = 0
         audio.play()
 
-        shoot.animate()
-        this.shootArray.push(shoot)
-
+        this.shootCount ++
     }
 
     removeShoot(entity){
-
+        
         if(entity != null){
-            document.getElementById(entity.id).remove()
-            this.shootArray = this.shootArray.filter(data => data.id != entity.id)
+            let shoot = document.getElementById(entity.id)
+            if(shoot != null){
+                shoot.remove()
+                this.shootArray = this.shootArray.filter(data => data.id != entity.id)
+    
+            }
         }
 
     }

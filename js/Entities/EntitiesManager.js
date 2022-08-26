@@ -27,6 +27,10 @@ export class EntitiesManager{
     initLevel(data){
         
         for(let enemy of data["enemies"]){
+
+            let loot = false
+            if(enemy.loot === '1')loot = true
+            
             this.entities.push(
                 new Starchip(
                     this.engine,
@@ -34,7 +38,10 @@ export class EntitiesManager{
                     enemy.X, 
                     enemy.Y, 
                     enemy.time, 
-                    enemy.ia
+                    enemy.ia, 
+                    loot, 
+                    enemy.lootType, 
+                    enemy.lootPower
                 )
             )
 

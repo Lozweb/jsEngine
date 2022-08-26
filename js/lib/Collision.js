@@ -28,7 +28,7 @@ export class Collision{
                 ))
                 {
                     this.engine.player.removeShoot(shoot)
-                    enemy.life -= this.engine.player.power
+                    enemy.life -= shoot.power
                 }
 
                 if(shoot.X > this.engine.width)this.engine.player.removeShoot(shoot)
@@ -61,6 +61,22 @@ export class Collision{
                 this.engine.player.damage(shootEn.power)
                 document.getElementById(shootEn.id).remove()
                 this.engine.levelManager.EnemiesShootArray = this.engine.levelManager.EnemiesShootArray.filter(data => data.id != shootEn.id)
+            }
+        }
+
+        for(let loot of this.engine.levelManager.lootArray){
+            if(this.isCollide(
+                loot.getRect(), 
+                this.engine.player.getRect()
+            ))
+            {
+                this.engine.levelManager.audioManager.playMusic('loot')
+
+                if(loot.type === 'power') this.engine.player.power += loot.power
+                if(loot.type === 'speed') this.engine.player.speed += loot.power
+
+                document.getElementById(loot.id).remove()
+                this.engine.levelManager.lootArray = this.engine.levelManager.lootArray.filter(data => data.id != loot.id)
             }
         }
 
@@ -100,6 +116,8 @@ export class Collision{
             }
 
         }
+
+        //clear loot
 
     }
 

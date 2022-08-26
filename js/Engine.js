@@ -1,7 +1,6 @@
 import { Screen } from "./lib/Screen.js"
 import { Collision } from "./lib/Collision.js"
 import { LevelManager } from "./lvl/LevelManager.js"
-import { StartScreen } from "./lib/layer-type/StartScreen.js"
 
 export class Engine{
 
@@ -57,9 +56,12 @@ export class Engine{
 
     loop(){
 
+
+        //check loot isOut to clean screen
         this.control.checkHitsAndCollidEnemies()
         this.control.cleanScreen()
-        if(this.player.isDead) {
+        
+        if(this.player.isDead && !this.gameOver) {
             this.player.isDead = false
             this.gameOver = true
             this.gameover()
@@ -83,8 +85,8 @@ export class Engine{
     }
 
     reset(){
-
-        for(let i=1; i < this.levelManager.level1.background.layers.length; i++){
+        
+        for(let i=0; i < this.levelManager.level1.background.layers.length; i++){
             if(this.levelManager.level1.background.layers[i].name != 'menu')
             document.getElementById(this.levelManager.level1.background.layers[i].name).remove()
         }

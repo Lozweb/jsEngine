@@ -13,6 +13,7 @@ export class LevelManager{
 
         this.EnemiesArray = new Array()
         this.EnemiesShootArray = new Array()
+        this.lootArray = new Array()
 
         this.level1 = new Level("level 1", this.engine)
 
@@ -24,9 +25,10 @@ export class LevelManager{
         this.engine.player = new Player('player')
         this.entitiesManager.loadLevel(file)
         this.audioManager.addAudioElement('intro-music', Assets.music('introduction'), 0.5, 'music')
-        this.audioManager.addAudioElement('lvl-music', Assets.music('level'), 0.3, 'music')
+        this.audioManager.addAudioElement('lvl-music', Assets.music('level1'), 1, 'music')
         this.audioManager.addAudioElement('shoot-sound', Assets.fx('laserfire01'), 1, 'fx')
         this.audioManager.addAudioElement('game-over', Assets.music('gameOver'), 1, 'music')
+        this.audioManager.addAudioElement('loot', Assets.fx('loot'), 1, 'fx')
     }
 
     menu(){

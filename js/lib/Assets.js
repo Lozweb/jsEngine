@@ -41,6 +41,6 @@ export class Assets{
     static music(name){
       return '/telechargement/jsEngine/js/assets/sound/musics/' + name + '.mp3'
     }
-*/
+    */
     
 }

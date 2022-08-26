@@ -11,9 +11,14 @@ export class Ath extends Layer{
         this.health = this.engine.player.health
         this.score = this.engine.player.score
 
+        this.speed = this.engine.player.speed
+        this.power = this.engine.player.power
+
         this.lifeText
         this.healthText
         this.scoreText
+        this.speedText
+        this.powerText
 
         this.interval = null
 
@@ -21,25 +26,30 @@ export class Ath extends Layer{
     }
 
     configCss(){
+
         this.css = 
         Css.widthPercent(100) + 
         Css.heightPercent(100) + 
         Css.margin("auto") + 
-        Css.position("absolute")
+        Css.position("absolute") + 
+        Css.fontFamily('retro')
 
         return this.css
     }
 
     containerStyle(){
+
         return Css.widthPercent(100) + 
                 Css.heightPx(50) + 
                 Css.minHeightPx(50) + 
                 Css.backgroundColor('rgba(0,0,0,0.6)') + 
                 Css.flex() + 
                 Css.overflow('hidden')
+
     }
 
     CreateHtmlElement(){
+
         this.container = document.createElement('div')
         this.container.setAttribute('id', this.name)
         this.container.style.cssText = this.containerStyle()
@@ -64,32 +74,57 @@ export class Ath extends Layer{
         Css.color('white') + 
         Css.padding('15px')
         this.scoreText.textContent = 'Score : ' + this.score
+
+        this.speedText = document.createElement('div')
+        this.speedText.setAttribute('id', 'speed')
+        this.speedText.style.cssText = 
+        Css.color('white') + 
+        Css.padding('15px')
+        this.speedText.textContent = 'Speed : ' + this.speed
+
+        this.powerText = document.createElement('div')
+        this.powerText.setAttribute('id', 'power')
+        this.powerText.style.cssText = 
+        Css.color('white') + 
+        Css.padding('15px')
+        this.powerText.textContent = 'Power : ' + this.power
         
         this.container.append(this.lifeText)
         this.container.append(this.healthText)
         this.container.append(this.scoreText)
+        this.container.append(this.speedText)
+        this.container.append(this.powerText)
 
         return this.container
+
     }
 
     addElement(){
+
         let layer = document.getElementById(this.name)
         layer.appendChild(this.CreateHtmlElement())
+
     }
 
     updateAth(){
+
         this.lifeText.textContent = "Life : " + this.engine.player.life
         this.healthText.textContent = "Health : " + this.engine.player.health
         this.scoreText.textContent = "Score : " + this.engine.player.score
+        this.speedText.textContent = "Speed : " + this.engine.player.speed
+        this.powerText.textContent = "Power : " + this.engine.player.power
+
     }
 
     init(){
+
         if(this.isInit){
             this.addElement()
             this.interval = setInterval(this.updateAth.bind(this), 16)
             this.engine.intervalArray.push(this.interval)
             this.isInit = false
         }
+
     }
 
 }

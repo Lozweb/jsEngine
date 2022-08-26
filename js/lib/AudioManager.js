@@ -24,14 +24,22 @@ export class AudioManager{
     playMusic(id){
 
         let audio = document.getElementById(id)
-        audio.play()
+        if(audio.paused) audio.play()
+        else {
+            audio.pause()
+            audio.currentTime = 0
+            audio.play()
+        }
         this.currentPlay = id
+
     }
 
     stopMusic(id){
+
         let audio = document.getElementById(id)
         audio.pause()
         audio.currentTime = 0
+        
     }
 
 }
