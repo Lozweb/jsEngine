@@ -1,4 +1,5 @@
 import { Assets } from "../lib/Assets.js"
+import { AudioManager } from "../lib/AudioManager.js"
 import { Css } from "../lib/Css.js"
 
 export class Explosion{
@@ -19,6 +20,8 @@ export class Explosion{
 
         this.count = 1;
 
+        this.audioManager = new AudioManager()
+        this.audioManager.addAudioElement('explos' + this.id, Assets.fx('explosion01'), 1, 'fx')
     }
 
     configCss(){
@@ -58,10 +61,13 @@ export class Explosion{
         if(this.count >  5) {
             clearInterval(this.interval)
             document.getElementById(this.id).remove()
+            this.audioManager.stopMusic('explos' + this.id)
+            document.getElementById('explos' + this.id).remove()
         }
     }
 
     animate(){
+        this.audioManager.playMusic('explos' + this.id)
         this.interval = setInterval(this.animBg.bind(this), 80)
     }
 

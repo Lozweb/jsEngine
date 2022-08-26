@@ -3,6 +3,7 @@ export class AudioManager{
     constructor(){
 
         this.audioArray = new Array()
+        this.currentPlay = null
 
     }
 
@@ -24,7 +25,13 @@ export class AudioManager{
 
         let audio = document.getElementById(id)
         audio.play()
-        
+        this.currentPlay = id
+    }
+
+    stopMusic(id){
+        let audio = document.getElementById(id)
+        audio.pause()
+        audio.currentTime = 0
     }
 
 }

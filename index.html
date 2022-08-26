@@ -8,9 +8,28 @@
 
     <body style="margin:0px; background-color: #000; color: #fff;">
         
+        
         <div id="game"></div>
 
+        <button id='button' onclick="play()">Play Intro Music</button>
+
+
         <script type="module" src="./js/script.js"></script>
+        <script>
+            function play(){
+                let audio = document.getElementById('intro-music');
+                let button = document.getElementById('button')
+
+                if(audio.paused){
+                    audio.play()
+                    button.textContent = "Stop Intro Music"
+                } 
+                else{
+                    audio.pause()
+                    button.textContent = "Play Intro Music"
+                } 
+            }
+        </script>
     </body>
     
 </html>

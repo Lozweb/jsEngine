@@ -35,6 +35,20 @@ export class Engine{
 
     }
 
+    startGame(){
+
+        this.playing = true;
+        this.startMenu = false
+
+        this.levelManager.audioManager.stopMusic('intro-music')
+
+        document.getElementById('button').remove()
+        document.getElementById('menu').remove()
+
+        this.run()
+
+    }
+
     run(){
         
         this.levelManager.start()
@@ -47,27 +61,15 @@ export class Engine{
 
         this.control.checkHitsAndCollidEnemies()
         this.control.cleanScreen()
-        
         if(this.player.isDead) this.levelManager.gameOver()
 
     }
 
-    startGame(event, any){
+    keyPress(event){
 
-        if(event.keyCode == 32 && this.startMenu) {
-
-            this.playing = true;
-            this.startMenu = false
-            document.getElementById('menu').remove()
-            this.run()
-
-        }
-
+        if(event.keyCode == 32 && this.startMenu) this.startGame()      
+        if(event.keyCode == 32 && this.playing) this.player.keyPress(event)
+        
     }
-
-    //explosion sound
-    //gestion game Over screen life & continue
-    //add new enemy comportement 
-    //add new class enemy extends + graphique
 
 }

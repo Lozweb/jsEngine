@@ -30,7 +30,7 @@ export class Assets{
       return '/telechargement/jsEngine/js/assets/img/' + name + '.png'
     }
 
-    static png(name){
+    static jpg(name){
       return '/telechargement/jsEngine/js/assets/img/' + name + '.jpg'
     }
 
@@ -41,6 +41,6 @@ export class Assets{
     static music(name){
       return '/telechargement/jsEngine/js/assets/sound/musics/' + name + '.mp3'
     }
-
-    */
+*/
+    
 }

@@ -39,25 +39,11 @@ export class Player{
         this.health = 100
         this.speed = 5
         this.isDead = false
-        this.life = 3
+        this.life = 0
         this.continue = 3
         this.score = 0
 
-
         this.countExplos = 0
-
-        document.addEventListener('keydown', () => {
-            this.keyDown(event, this)
-        })
-        document.addEventListener('keyup', () => {
-            this.keyUp(event, this)
-        })
-
-        document.addEventListener('keypress', () => 
-        {
-            this.keyPress(event, this)
-        })
-
         this.shootCount = 0
 
         this.layer = null
@@ -113,7 +99,7 @@ export class Player{
 
     }
 
-    keyPress(event, player){
+    keyPress(event){
         if(event.keyCode == 32 && !this.isDead) this.shoot()
     }
 
@@ -188,7 +174,6 @@ export class Player{
     }
 
     shoot(){
-
         let shoot = new Shoot('shoot' + this.shootCount, this.X, this.Y)
         shoot.speed.x = 15
         shoot.createHtmlElement()
@@ -222,10 +207,14 @@ export class Player{
         this.layer.addEntity(explod.element)
         explod.animate()
         if(this.health === 0 || this.health < 0){
+            this.health = 100
+            this.life --
+        } 
+        if(this.life < 0){
             this.isDead = true
             this.health = 0
-        } 
-
+            this.life = 0
+        }
     }
 
 }

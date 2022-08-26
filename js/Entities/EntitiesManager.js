@@ -73,4 +73,8 @@ export class EntitiesManager{
 
     }
     
+    reset(){
+        this.tick = 0
+        this.count = 0
+    }
 }

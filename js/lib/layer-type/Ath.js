@@ -16,6 +16,8 @@ export class Ath extends Layer{
         this.scoreText
 
         this.interval = null
+
+        this.isInit = true
     }
 
     configCss(){
@@ -82,9 +84,12 @@ export class Ath extends Layer{
     }
 
     init(){
-        this.addElement()
-        this.interval = setInterval(this.updateAth.bind(this), 16)
-        this.engine.intervalArray.push(this.interval)
+        if(this.isInit){
+            this.addElement()
+            this.interval = setInterval(this.updateAth.bind(this), 16)
+            this.engine.intervalArray.push(this.interval)
+            this.isInit = false
+        }
     }
 
 }

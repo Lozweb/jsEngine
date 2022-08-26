@@ -46,7 +46,9 @@ export class Collision{
                 this.engine.player.damage(40)
             }
 
-            if(enemy.life <= 0) enemy.explosion('explos-' + enemy.id)
+            if(enemy.life <= 0) {
+                enemy.explosion('explos-' + enemy.id)
+            }
 
         }
 

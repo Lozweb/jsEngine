@@ -15,23 +15,19 @@ export class LevelManager{
         this.EnemiesArray = new Array()
         this.EnemiesShootArray = new Array()
 
-        //data from json
         this.level1 = new Level("level 1", this.engine)
-        this.levelArray = new Array()
 
         this.audioManager = new AudioManager()
-
-        this.levelArray = new Array()
-
     }
 
     loadLevel(file){
 
-        //file json for script enemy
+        this.engine.player = new Player('player')
         this.entitiesManager.loadLevel(file)
-        this.audioManager.addAudioElement('lvl-music', Assets.music('level'), 0.5, 'music')
+        this.audioManager.addAudioElement('intro-music', Assets.music('introduction'), 0.5, 'music')
+        this.audioManager.addAudioElement('lvl-music', Assets.music('level'), 0.3, 'music')
         this.audioManager.addAudioElement('shoot-sound', Assets.fx('laserfire01'), 1, 'fx')
-
+        this.audioManager.addAudioElement('game-over', Assets.music('gameOver'), 1, 'music')
     }
 
     menu(){
@@ -45,14 +41,11 @@ export class LevelManager{
 
     start(){
 
-        this.engine.player = new Player('player')
-
         this.level1.configLayer()
-
-        this.audioManager.playMusic('lvl-music')
-
         this.level1.addEntity(this.engine.player, 3)
         this.level1.initLayer(4)
+
+        this.audioManager.playMusic('lvl-music')
 
         this.entitiesManager.start()
     
@@ -60,19 +53,9 @@ export class LevelManager{
 
     gameOver(){
 
-        let gameOver = new GameOver('gameOver', '', this.engine)    
-
-            //play sound gameover
-            //display score
-
-            gameOver.removePlayer()
-            
-            gameOver.stopAnim()
-
-            //clean screen 
-            
-            //if life = 0 => gameOver screen
-            //else reload level1, player.life --
+        this.engine.gameOver = true
+        this.engine.playing = false
+        let gameOver = new GameOver('gameOver', '', this.engine)   
 
     }
 

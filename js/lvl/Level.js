@@ -8,12 +8,26 @@ export class Level{
         this.engine = engine
         this.screen = this.engine.screen
         this.background = new Background(this.screen.id, this.screen.width, this.screen.height)
+        this.isInit = true
+        
+        document.addEventListener('keydown', () => {
+            this.engine.player.keyDown(event, this.engine.player)
+        })
+        document.addEventListener('keyup', () => {
+            this.engine.player.keyUp(event, this.engine.player)
+        })
+
+        document.addEventListener('keypress', () => 
+        {
+            this.engine.keyPress(event)
+        })
     }
 
     configLayer(){
 
         this.background.addLayer("entities", "none", this.screen.container)
         this.background.addLayer("ath", "ath", this.screen.container, '',this.engine)
+
     }
 
     configMenu(){
@@ -21,9 +35,6 @@ export class Level{
         this.background.addLayer("stars", "infinitStars", this.screen.container)
         this.background.addLayer("nebuleuse", "infinitBackground", this.screen.container, Assets.png("nebuleuse"))
         this.background.addLayer("menu", "menu", this.screen.container)
-        document.addEventListener('keypress', () => {
-            this.engine.startGame(event, this)
-        })
         
     }
 
@@ -41,8 +52,6 @@ export class Level{
     }
 
     initLayer(layerIndex){
-
         this.background.layers[layerIndex].init()
-        
     }
 }
