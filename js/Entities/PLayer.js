@@ -14,7 +14,8 @@ export class Player{
         this.X = 0
         this.Y = 0
 
-        
+        this.motion = 0
+        this.touch = false
 
         this.direction = {
             up : false,
@@ -39,9 +40,10 @@ export class Player{
         this.health = 100
         this.speed = 3
         this.isDead = false
-        this.life = 0
+        this.life = 3
         this.continue = 3
         this.score = 0
+        this.destroy = false
 
         this.countExplos = 0
         this.shootCount = 0
@@ -186,7 +188,7 @@ export class Player{
 
         this.shootArray.push(shoot)
 
-        if(this.power >= 70){
+        if(this.power >= 55){
 
             let shoot2 = new Shoot('shoot2' + this.shootCount, this.X, this.Y-5)
             shoot2.speed.x = 15
@@ -226,15 +228,24 @@ export class Player{
         explod.createHtmlElement()
         this.layer.addEntity(explod.element)
         explod.animate()
+
         if(this.health === 0 || this.health < 0){
             this.health = 100
             this.life --
+            this.destroy = true
         } 
         if(this.life < 0){
             this.isDead = true
             this.health = 0
             this.life = 0
         }
+    }
+
+    playerTouched(){
+        //invincible duration?
+        //vulnerable duration => damage x 10
+            //play alert sound
+            //add fire on sprite
     }
 
 }

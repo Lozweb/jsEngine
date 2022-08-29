@@ -20,17 +20,19 @@ export class Loot{
         }
 
         this.css = ""
-
         this.element = null
-
         this.interval = null
-
+        
         this.power = 10
+        this.direction = 'bottom'
 
-        //design for speed & power
-        //shield ?
-        //rotate figure?
-        //speed.Y ++ ?
+        if(this.getRandom(0,1) === 0) this.direction = 'top'
+
+        this.img = ''
+        if(this.type === 'speed')this.img = Assets.png('loot01')
+        if(this.type === 'power')this.img = Assets.png('loot02')
+        
+        this.rotate = 0
     }
 
     configCss(){
@@ -43,8 +45,8 @@ export class Loot{
             Css.margin('0') + 
             Css.top(this.position.y + 'px') +
             Css.left(this.position.x + 'px') + 
-            Css.backgroundImage(Assets.png('loot01')) + 
-            Css.backgroundSize('cover')
+            Css.backgroundImage(this.img) + 
+            Css.backgroundSize('30px')
 
         return this.css
     }
@@ -53,6 +55,7 @@ export class Loot{
 
         let loot = document.createElement('figure')
         loot.setAttribute('id', this.id)
+        loot.setAttribute('class', 'loot')
         loot.style.cssText = this.configCss()
         this.element = loot
         return this.element
@@ -61,8 +64,13 @@ export class Loot{
 
     move(){
 
-        this.position.x -= 1
+        this.position.x -= 0.7 
+        if(this.direction === 'top') this.position.y -= 0.1
+        else this.position.y += 0.1
+        this.rotate += 2
         this.element.style.left = this.position.x + 'px'
+        this.element.style.top = this.position.y + 'px'
+        this.element.style.transform = "rotate("+this.rotate+"deg)"
 
     }
 
@@ -75,5 +83,9 @@ export class Loot{
 
     getRect(){
         return {x:this.position.x, y:this.position.y, width: this.size.width, height:this.size.height}
+    }
+
+    getRandom(min, max){
+        return Math.floor(Math.random() * (max - min + 1) ) + min
     }
 }

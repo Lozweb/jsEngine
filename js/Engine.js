@@ -67,6 +67,10 @@ export class Engine{
             this.gameover()
         }
 
+        if(this.player.destroy && !this.player.isDead){
+            
+        }
+
     }
 
     gameover(){

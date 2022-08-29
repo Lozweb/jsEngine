@@ -6,50 +6,50 @@
             "X" : 1200,
             "Y" : 100,
             "time" : 3,
-            "ia" : "straight",
-            "loot": "0", 
-            "lootType": "", 
-            "lootPower":0
+            "ia" : "halfTurn",
+            "loot": "1", 
+            "lootType": "power", 
+            "lootPower":1
         },
 
         {
             "X" : 1200,
             "Y" : 100,
             "time" : 6,
-            "ia" : "straight",
-            "loot": "0", 
-            "lootType": "", 
-            "lootPower":0
+            "ia" : "halfTurn",
+            "loot": "1", 
+            "lootType": "power", 
+            "lootPower":1
         },
 
         {
             "X" : 1200,
             "Y" : 100,
             "time" : 9,
-            "ia" : "straight",
-            "loot": "0", 
-            "lootType": "", 
-            "lootPower":0
+            "ia" : "halfTurn",
+            "loot": "1", 
+            "lootType": "power", 
+            "lootPower":1
         },
 
         {
             "X" : 1200,
             "Y" : 100,
             "time" : 12,
-            "ia" : "straight",
-            "loot": "0", 
-            "lootType": "", 
-            "lootPower":0
+            "ia" : "halfTurn",
+            "loot": "1", 
+            "lootType": "power", 
+            "lootPower":1
         },
 
         {
             "X" : 1200,
             "Y" : 100,
             "time" : 15,
-            "ia" : "straight",
+            "ia" : "halfTurn",
             "loot": "1", 
             "lootType": "speed", 
-            "lootPower": 1
+            "lootPower": 0.5
         },
 
 
@@ -60,56 +60,44 @@
 
 
         {
-            "X" : 1200,
-            "Y" : 500,
+            "X" : 950,
+            "Y" : 150,
             "time" : 70,
-            "ia" : "straight",
+            "ia" : "slow",
             "loot": "0", 
             "lootType": "", 
             "lootPower":0
         },
 
         {
-            "X" : 1200,
-            "Y" : 500,
-            "time" : 73,
-            "ia" : "straight",
+            "X" : 950,
+            "Y" : 150,
+            "time" : 85,
+            "ia" : "slow",
             "loot": "0", 
             "lootType": "", 
             "lootPower":0
         },
 
         {
-            "X" : 1200,
-            "Y" : 500,
-            "time" : 76,
-            "ia" : "straight",
+            "X" : 950,
+            "Y" : 350,
+            "time" : 70,
+            "ia" : "slow",
             "loot": "0", 
             "lootType": "", 
             "lootPower":0
         },
 
         {
-            "X" : 1200,
-            "Y" : 500,
-            "time" : 79,
-            "ia" : "straight",
+            "X" : 950,
+            "Y" : 350,
+            "time" : 85,
+            "ia" : "slow",
             "loot": "0", 
             "lootType": "", 
             "lootPower":0
         },
-
-        {
-            "X" : 1200,
-            "Y" : 500,
-            "time" : 82,
-            "ia" : "straight",
-            "loot": "1", 
-            "lootType": "speed", 
-            "lootPower":1
-        },
-
-
 
 
 
@@ -164,7 +152,7 @@
             "ia" : "straight",
             "loot": "1", 
             "lootType": "power", 
-            "lootPower": 10
+            "lootPower": 1
         },
 
 
@@ -221,7 +209,7 @@
             "ia" : "straight",
             "loot": "1", 
             "lootType": "power", 
-            "lootPower":10
+            "lootPower":1
         },
 
 
@@ -266,7 +254,7 @@
             "ia" : "sinus",
             "loot": "1", 
             "lootType": "power", 
-            "lootPower":10
+            "lootPower":1
         },
 
 
@@ -311,7 +299,7 @@
             "ia" : "sinus",
             "loot": "1", 
             "lootType": "speed", 
-            "lootPower":1
+            "lootPower":0.5
         }
         
     ]

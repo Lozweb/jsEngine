@@ -99,8 +99,10 @@ export class Collision{
         for(let shootEn of this.engine.levelManager.EnemiesShootArray){
 
             if(shootEn.X > this.engine.width || shootEn.X < 0 ||shootEn.Y > this.engine.height || shootEn.Y < 0){
+                
                 document.getElementById(shootEn.id).remove()
                 this.engine.levelManager.EnemiesShootArray = this.engine.levelManager.EnemiesShootArray.filter(data => data.id != shootEn.id)
+            
             }
 
         }
@@ -118,7 +120,18 @@ export class Collision{
         }
 
         //clear loot
+        for(let loot of this.engine.levelManager.lootArray){
 
+            if(loot.position.x < 0 || loot.position.x > this.engine.width || 
+                loot.position.y < 0 || loot.position.y > this.engine.height)
+            {
+
+                document.getElementById(loot.id).remove()
+                this.engine.levelManager.lootArray = this.engine.levelManager.lootArray.filter(data => data.id != loot.id)
+
+            }
+
+        }
     }
 
 }

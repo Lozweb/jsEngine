@@ -32,7 +32,8 @@ export class Starchip{
             speed: 0.02, 
             deph: 350,
             tick: 0, 
-            pi: 3.14
+            pi: 3.14, 
+            step: 0
         }
 
         this.layer = null
@@ -45,6 +46,11 @@ export class Starchip{
         this.loot = loot
         this.lootType = lootType
         this.lootPower = lootPower
+
+        this.direction = {
+            y: 'bottom', 
+            x: 'left'
+        }
 
         this.createHtmlElement()
     }
@@ -113,8 +119,20 @@ export class Starchip{
 
     animate(){
 
-        if(this.behaviour === "straight") this.interval = setInterval(this.straight.bind(this), 16)
-        if(this.behaviour === "sinus") this.interval = setInterval(this.sinus.bind(this), 16)
+        if(this.behaviour === "straight") {
+            this.interval = setInterval(this.straight.bind(this), 16)
+        }
+        if(this.behaviour === "sinus"){
+            this.interval = setInterval(this.sinus.bind(this), 16)
+        } 
+        if(this.behaviour === "halfTurn"){
+            if(this.Y > 300) this.direction.y = 'top'
+            if(this.Y < 300) this.direction.y = 'bottom'
+            this.interval = setInterval(this.halfTurn.bind(this), 16)
+        } 
+        if(this.behaviour === "slow"){
+            this.interval = setInterval(this.slow.bind(this), 16)
+        }
         this.engine.intervalArray.push(this.interval)
     
     }
@@ -125,9 +143,45 @@ export class Starchip{
         this.element.style.left = this.X + "px"
         this.motion.tick ++
         
-        if(this.motion.tick === 100 && this.life > 0){
-            this.shoot()
-        } 
+        if(this.motion.tick === 100 && this.life > 0) this.shoot()
+        
+    }
+
+    slow(){
+
+        this.X -= this.speed/2
+        this.element.style.left = this.X + "px"
+        this.motion.tick ++
+        
+        if(this.motion.tick === 100 && this.life > 0) this.shoot()
+        if(this.motion.tick === 200 && this.life > 0) this.shoot()
+        if(this.motion.tick === 300 && this.life > 0) this.shoot()
+        if(this.motion.tick === 400 && this.life > 0) this.shoot()
+
+    }
+
+    halfTurn(){
+
+        if(this.motion.step === 0){
+
+            this.X -= this.speed
+            if(this.X < 100) this.motion.step = 1
+        }
+        if(this.motion.step === 1){
+
+            this.X += this.speed/2
+            if(this.direction.y === 'top') this.Y -= 2
+            if(this.direction.y === 'bottom') this.Y += 2 
+
+        }
+        
+        this.motion.tick ++
+
+        if(this.motion.tick === 100 && this.life > 0) this.shoot()
+        if(this.motion.tick === 350 && this.life > 0) this.shoot()
+
+        this.element.style.left = this.X + "px"
+        this.element.style.top = this.Y + "px"
     }
 
     sinus(){
@@ -135,13 +189,20 @@ export class Starchip{
         this.speed = 2
         this.X -= this.speed
 
-        this.motion.tick ++
         this.Y = (this.motion.ampli * Math.sin(this.motion.tick*this.motion.speed*this.motion.pi)) + this.motion.deph
 
         this.element.style.left = this.X + "px"
         this.element.style.top = this.Y + "px"
 
-        if(this.motion.tick === 100 && this.life > 0) this.shoot()
+        this.motion.tick ++
+        
+        if(this.motion.tick === 250 && this.life > 0) {
+            this.shoot()
+        }
+
+        if(this.motion.tick === 550 && this.life > 0) {
+            this.shoot()
+        }
 
     }
 

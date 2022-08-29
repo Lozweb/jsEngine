@@ -22,7 +22,16 @@ export class LevelManager{
 
     loadLevel(file){
 
-        this.engine.player = new Player('player')
+        if(this.engine.player === null){
+            //init
+            this.engine.player = new Player('player')
+        }else if(this.engine.player.isDead){
+            //gameover
+            this.engine.player = new Player('player')
+        }
+        else if(this.engine.player.destroy){    
+            //restart
+        }
         this.entitiesManager.loadLevel(file)
         this.audioManager.addAudioElement('intro-music', Assets.music('introduction'), 0.5, 'music')
         this.audioManager.addAudioElement('lvl-music', Assets.music('level1'), 1, 'music')
