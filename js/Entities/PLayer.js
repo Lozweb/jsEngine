@@ -38,7 +38,7 @@ export class Player{
 
         this.power = 50
         this.health = 100
-        this.speed = 3
+        this.speed = 6
         this.isDead = false
         this.life = 3
         this.continue = 3
@@ -165,7 +165,7 @@ export class Player{
 
     animate(){
 
-        this.interval = setInterval(this.moveTo.bind(this), 16)
+        this.interval = setInterval(this.moveTo.bind(this), 33)
         this.getSize()
     }
 

@@ -51,7 +51,7 @@ export class Engine{
         this.levelManager.start()
         this.player.getPosition()
         this.player.animate()
-        this.loopControl = setInterval(this.loop.bind(this), 16)
+        this.loopControl = setInterval(this.loop.bind(this), 33)
     }
 
     loop(){

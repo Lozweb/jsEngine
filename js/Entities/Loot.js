@@ -76,7 +76,7 @@ export class Loot{
 
     animate(){
 
-        this.interval = setInterval(this.move.bind(this), 16)
+        this.interval = setInterval(this.move.bind(this), 33)
         this.engine.intervalArray.push(this.interval)
 
     }

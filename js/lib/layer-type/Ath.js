@@ -120,7 +120,7 @@ export class Ath extends Layer{
 
         if(this.isInit){
             this.addElement()
-            this.interval = setInterval(this.updateAth.bind(this), 16)
+            this.interval = setInterval(this.updateAth.bind(this), 33)
             this.engine.intervalArray.push(this.interval)
             this.isInit = false
         }

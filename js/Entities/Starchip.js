@@ -18,7 +18,7 @@ export class Starchip{
         this.X = x
         this.Y = y
 
-        this.speed = 5
+        this.speed = 10
 
         this.size = {
             width: 23, 
@@ -28,7 +28,7 @@ export class Starchip{
         this.interval = null
 
         this.motion = {
-            ampli: 50,
+            ampli: 100,
             speed: 0.02, 
             deph: 350,
             tick: 0, 
@@ -120,18 +120,18 @@ export class Starchip{
     animate(){
 
         if(this.behaviour === "straight") {
-            this.interval = setInterval(this.straight.bind(this), 16)
+            this.interval = setInterval(this.straight.bind(this), 33)
         }
         if(this.behaviour === "sinus"){
-            this.interval = setInterval(this.sinus.bind(this), 16)
+            this.interval = setInterval(this.sinus.bind(this), 33)
         } 
         if(this.behaviour === "halfTurn"){
             if(this.Y > 300) this.direction.y = 'top'
             if(this.Y < 300) this.direction.y = 'bottom'
-            this.interval = setInterval(this.halfTurn.bind(this), 16)
+            this.interval = setInterval(this.halfTurn.bind(this), 33)
         } 
         if(this.behaviour === "slow"){
-            this.interval = setInterval(this.slow.bind(this), 16)
+            this.interval = setInterval(this.slow.bind(this), 33)
         }
         this.engine.intervalArray.push(this.interval)
     
@@ -170,8 +170,8 @@ export class Starchip{
         if(this.motion.step === 1){
 
             this.X += this.speed/2
-            if(this.direction.y === 'top') this.Y -= 2
-            if(this.direction.y === 'bottom') this.Y += 2 
+            if(this.direction.y === 'top') this.Y -= 4
+            if(this.direction.y === 'bottom') this.Y += 4
 
         }
         
@@ -187,7 +187,7 @@ export class Starchip{
     sinus(){
 
         this.speed = 2
-        this.X -= this.speed
+        this.X -= this.speed * 2
 
         this.Y = (this.motion.ampli * Math.sin(this.motion.tick*this.motion.speed*this.motion.pi)) + this.motion.deph
 

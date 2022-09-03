@@ -44,7 +44,7 @@ export class LevelManager{
         
         this.level1.configMenu()
         this.level1.initLayer(2)
-        this.level1.animateLayer("left", 0)
+        //this.level1.animateLayer("left", 0)
         this.level1.animateLayer("left", 1)
 
     }
