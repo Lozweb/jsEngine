@@ -33,7 +33,8 @@ export class Starchip{
             deph: 350,
             tick: 0, 
             pi: 3.14, 
-            step: 0
+            step: 0, 
+            shootTick: 0
         }
 
         this.layer = null
@@ -144,21 +145,31 @@ export class Starchip{
 
     boss(){
 
-        //phase en fonction de life
+        //phase en fonction de life 
+
+        this.motion.ampli = 100
+        this.motion.speed = 0.01
+        this.motion.deph = 150
 
         if(this.motion.step === 0){
-            this.X -= this.speed
-            this.element.style.left = this.X + "px"
-            this.motion.tick ++
+            this.X -= this.speed/2
             if(this.X < 500)this.motion.step = 1
         }
-        
-        
-        if(this.motion.tick === 200 && this.life > 0) {
-            this.shoot()
-            this.motion.tick = 0
+
+        //phase 1
+        if(this.motion.step === 1){
+            this.Y = (this.motion.ampli * Math.sin(this.motion.tick*this.motion.speed*this.motion.pi)) + this.motion.deph  
         }
 
+        if(this.motion.shootTick === 50 && this.life > 0) {
+            this.shoot()
+            this.motion.shootTick = 0
+        }
+
+        this.element.style.left = this.X + "px"
+        this.element.style.top = this.Y + "px"
+        this.motion.tick ++ 
+        this.motion.shootTick ++
     }
 
     straight(){ 
@@ -235,6 +246,8 @@ export class Starchip{
         console.log('shoot');
         let shoot = new Shoot(this.id + 'shoot' + this.shootCount, this.X, this.Y)
         shoot.speed.x = 5
+        shoot.X = this.X + (this.size.width /2)
+        shoot.Y = this.Y + (this.size.height / 2)
         shoot.power = this.power
         shoot.setShootEnemy(this.engine.player.X, this.engine.player.Y)
         shoot.createHtmlElementForEnemy()
