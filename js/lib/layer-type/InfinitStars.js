@@ -17,7 +17,7 @@ export class InfinitStars extends Layer{
     }
 
     load(){
-        while(this.stars.countId < 50){
+        while(this.stars.countId < 25){
             this.arrStar.push(this.stars.createRandomStar())
         }
 

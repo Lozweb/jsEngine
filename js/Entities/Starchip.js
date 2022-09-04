@@ -6,7 +6,7 @@ import { Loot } from "./Loot.js"
 
 export class Starchip{
 
-    constructor(engine, id, x=0, y=0, time=0, behaviour="straight", loot=false, lootType="", lootPower=0){
+    constructor(engine, id, x=0, y=0, time=0, behaviour="straight", loot=false, lootType="", lootPower=0, width=23, height=27, sprite='ennemy1'){
 
         this.engine = engine
 
@@ -21,8 +21,8 @@ export class Starchip{
         this.speed = 10
 
         this.size = {
-            width: 23, 
-            height: 27
+            width: width, 
+            height: height
         }
 
         this.interval = null
@@ -52,6 +52,8 @@ export class Starchip{
             x: 'left'
         }
 
+        this.spriteFile = sprite
+
         this.createHtmlElement()
     }
 
@@ -65,7 +67,7 @@ export class Starchip{
             Css.margin('0') +
             Css.top(this.Y + 'px') + 
             Css.left(this.X + 'px') + 
-            Css.backgroundImage(Assets.png('ennemy1')) 
+            Css.backgroundImage(Assets.png(this.spriteFile)) 
         return this.css
 
     }
@@ -133,8 +135,30 @@ export class Starchip{
         if(this.behaviour === "slow"){
             this.interval = setInterval(this.slow.bind(this), 33)
         }
+        if(this.behaviour === "boss"){
+            this.interval = setInterval(this.boss.bind(this), 33)
+        }
         this.engine.intervalArray.push(this.interval)
     
+    }
+
+    boss(){
+
+        //phase en fonction de life
+
+        if(this.motion.step === 0){
+            this.X -= this.speed
+            this.element.style.left = this.X + "px"
+            this.motion.tick ++
+            if(this.X < 500)this.motion.step = 1
+        }
+        
+        
+        if(this.motion.tick === 200 && this.life > 0) {
+            this.shoot()
+            this.motion.tick = 0
+        }
+
     }
 
     straight(){ 
@@ -208,6 +232,7 @@ export class Starchip{
 
     shoot(){
 
+        console.log('shoot');
         let shoot = new Shoot(this.id + 'shoot' + this.shootCount, this.X, this.Y)
         shoot.speed.x = 5
         shoot.power = this.power

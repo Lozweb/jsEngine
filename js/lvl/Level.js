@@ -33,7 +33,7 @@ export class Level{
     configMenu(){
 
         //stars => infinitStars replace by infinitBackground for better performance
-        this.background.addLayer("stars", "none", this.screen.container)
+        this.background.addLayer("stars", "infinitStars", this.screen.container)
         this.background.addLayer("nebuleuse", "infinitBackground", this.screen.container, Assets.png("nebuleuse"))
         this.background.addLayer("menu", "menu", this.screen.container)
         

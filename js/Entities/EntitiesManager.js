@@ -1,3 +1,4 @@
+import { Css } from "../lib/Css.js"
 import { Starchip } from "./Starchip.js"
 
 export class EntitiesManager{
@@ -31,9 +32,10 @@ export class EntitiesManager{
             let loot = false
             if(enemy.loot === '1')loot = true
             
-            this.entities.push(
-                new Starchip(
-                    this.engine,
+            if(enemy.ia === 'boss'){
+                //check boss
+                let boss = new Starchip(
+                    this.engine, 
                     'en' + this.count, 
                     enemy.X, 
                     enemy.Y, 
@@ -41,10 +43,30 @@ export class EntitiesManager{
                     enemy.ia, 
                     loot, 
                     enemy.lootType, 
-                    enemy.lootPower
+                    enemy.lootPower, 
+                    230, 
+                    336,
+                    '9B'
                 )
-            )
-
+                boss.life = 10000
+                boss.points = 100000
+                this.entities.push(boss)
+            }
+            else{
+                this.entities.push(
+                    new Starchip(
+                        this.engine,
+                        'en' + this.count, 
+                        enemy.X, 
+                        enemy.Y, 
+                        enemy.time, 
+                        enemy.ia, 
+                        loot, 
+                        enemy.lootType, 
+                        enemy.lootPower
+                    )
+                )
+            }
             this.count ++
         }
 
@@ -54,6 +76,7 @@ export class EntitiesManager{
 
         this.timer = setInterval(this.checkAddEnemy.bind(this), 100)
         this.engine.intervalArray.push(this.timer)
+
     }
 
     checkAddEnemy(){
